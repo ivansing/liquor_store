@@ -1,11 +1,10 @@
 
-import 'package:ecommerce_app/screens/home/home_screen.dart';
+
+import 'package:ecommerce_app/models/category_model.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/category/category_screen.dart';
-import '../screens/product/product_screen.dart';
-import '../screens/wishlist/wishlist_screen.dart';
+
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -28,7 +27,7 @@ class AppRouter {
         return WishlistScreen.route();
 
       case CategoryScreen.routeName:
-        return CategoryScreen.route();      
+        return CategoryScreen.route(category: settings.arguments as Category);      
 
       default:
         return _errorRoute();

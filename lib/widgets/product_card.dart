@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
+  final double widthFactor;
 
   const ProductCard({
     Key? key,
-    required this.product
+    required this.product,
+    this.widthFactor = 2.5,
   }) : super(key: key);
 
   @override
@@ -14,20 +16,20 @@ class ProductCard extends StatelessWidget {
     return Stack(
      children: [
        Container(
-         width: MediaQuery.of(context).size.width / 2.5,
+         width: MediaQuery.of(context).size.width / widthFactor,
          height: 165,
          child: Image.network(product.imageUrl,
          fit: BoxFit.cover,
          ),
        ),
        Positioned(
-         top: 65,
+         top: 50,
          left: 5,
            child: Container(
            width: MediaQuery.of(context).size.width / 2.5 - 10,
-           height: 70,
+           height: 55,
            decoration: BoxDecoration(
-             color: Colors.black,
+             color: Colors.black38,
            ),
            child: Padding(
              padding: const EdgeInsets.all(8.0),

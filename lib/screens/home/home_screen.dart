@@ -1,6 +1,6 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce_app/models/category_model.dart';
+
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +26,8 @@ class HomeScreen extends StatelessWidget {
               Container(
                   child: CarouselSlider(
                 options: CarouselOptions(
-                  aspectRatio: 1.6,
-                  viewportFraction: 0.8,
+                  aspectRatio: 1.8,
+                  viewportFraction: 0.7,
                   enlargeCenterPage: true,
                   enlargeStrategy: CenterPageEnlargeStrategy.height,        
                 ),
