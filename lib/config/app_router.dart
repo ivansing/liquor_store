@@ -4,6 +4,8 @@ import 'package:ecommerce_app/models/category_model.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
+import '../models/product_model.dart';
+
 
 
 class AppRouter {
@@ -21,7 +23,7 @@ class AppRouter {
         return CartScreen.route();  
 
       case ProductScreen.routeName:
-        return ProductScreen.route();
+        return ProductScreen.route(product: settings.arguments as Product);
 
       case WishlistScreen.routeName:
         return WishlistScreen.route();
