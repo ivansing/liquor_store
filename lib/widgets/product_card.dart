@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
+  final double leftPosition;
+  final bool isWishlist;
 
   const ProductCard({
     Key? key,
     required this.product,
     this.widthFactor = 2.5,
+    this.leftPosition = 10,
+    this.isWishlist = false
   }) : super(key: key);
 
   @override
@@ -30,16 +34,16 @@ class ProductCard extends StatelessWidget {
            ),
          ),
          Positioned(
-           top: 50,
-           left: 5,
+           top: 80,
+           left: leftPosition,
              child: Container(
-             width: MediaQuery.of(context).size.width / 2.5 - 10,
+             width: MediaQuery.of(context).size.width / 2.1 - 10,
              height: 55,
              decoration: BoxDecoration(
                color: Colors.black38,
              ),
              child: Padding(
-               padding: const EdgeInsets.all(8.0),
+               padding: const EdgeInsets.all(5.0),
                child: Row(
                  children: [
                  Expanded(
@@ -68,13 +72,28 @@ class ProductCard extends StatelessWidget {
                    ),
                  ),
                  Expanded(
-                   child: IconButton(
-                       icon: Icon(Icons.add_circle, 
-                       color: Colors.white,
-                     ), 
-                     onPressed: () {},
+                   child: Container(
+                     padding: EdgeInsets.only(right: 30.0),
+                     child: IconButton(
+                         icon: Icon(Icons.add_circle, 
+                         color: Colors.white, size: 30,
+                       ), 
+                       onPressed: () {},
+                     ),
                    ),
-                 )
+                 ),
+                 isWishlist ?
+                  Expanded(
+                   child: Container(
+                     padding: EdgeInsets.only(right: 30.0),
+                     child: IconButton(
+                         icon: Icon(Icons.delete, 
+                         color: Colors.white, size: 30,
+                       ), 
+                       onPressed: () {},
+                     ),
+                   ),
+                 ) : SizedBox(),
                 ],
                ),
              ),
