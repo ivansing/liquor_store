@@ -1,8 +1,9 @@
+
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/models/cart_model.dart';
 
-import '../../widgets/cart_product_card.dart';
 
 class CartScreen extends StatelessWidget {
   static const String routeName = '/cart';
@@ -45,12 +46,9 @@ class CartScreen extends StatelessWidget {
               Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Agregar \$17.000',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
+                     
                       ElevatedButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/');
@@ -68,10 +66,19 @@ class CartScreen extends StatelessWidget {
                           )),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  CartProductCard(product: Product.products[0]),
-                  CartProductCard(product: Product.products[1]),
-                  CartProductCard(product: Product.products[2]),
+                  SizedBox(height: 5),
+
+                    SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: ListView.builder(
+                      itemCount: Cart.products.length,
+                      itemBuilder: (context, index) {
+                        return CartProductCard(product: Cart.products[index]);
+                      },
+                    ),
+                  ),  
+               
+                 
                 ],
               ),
               Column(
@@ -81,7 +88,7 @@ class CartScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10.0),
+                        horizontal: 30, vertical: 10.0),
                     child: Column(
                       children: [
                         Row(
@@ -92,7 +99,7 @@ class CartScreen extends StatelessWidget {
                               style: Theme.of(context).textTheme.headline3,
                             ),
                             Text(
-                              '\$32.000',
+                              '\$${Cart().subtotalString}',
                               style: Theme.of(context).textTheme.headline3,
                             ),
                           ],
@@ -100,18 +107,20 @@ class CartScreen extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'DOMICILIO',
-                              style: Theme.of(context).textTheme.headline3,
-                            ),
-                            Text(
-                              '\$5.000',
-                              style: Theme.of(context).textTheme.headline3,
-                            ),
-                          ],
+                        SingleChildScrollView(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'DOMICILIO',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                              Text(
+                                '\$${Cart().deliveryFeeString}',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -142,7 +151,7 @@ class CartScreen extends StatelessWidget {
                                     .copyWith(color: Colors.white),
                               ),
                               Text(
-                                '\$37.000',
+                                '\$${Cart().totalString}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline5!

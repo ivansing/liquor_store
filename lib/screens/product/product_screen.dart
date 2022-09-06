@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/bloc/wishlist_bloc.dart';
 
-
 class ProductScreen extends StatelessWidget {
   static const String routeName = '/product';
 
@@ -50,8 +49,9 @@ class ProductScreen extends StatelessWidget {
                             .read<WishlistBloc>()
                             .add(AddtWishlistProduct(product));
 
-                            final snackBar = SnackBar(content: Text('Se agrego a tu lista de deseos'));
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        final snackBar = SnackBar(
+                            content: Text('Se agrego a tu lista de deseos'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       });
                 },
               ),
