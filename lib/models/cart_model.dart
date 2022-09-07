@@ -6,7 +6,24 @@ import 'product_model.dart';
 
 class Cart extends Equatable {
   final List<Product> products;
+
   const Cart({this.products = const <Product>[]});
+
+  @override
+  List<Object?> get props => [products];
+
+  Map productQuantity(products) {
+    var quantity = Map();
+
+    products.forEach((product) {
+      if (!quantity.containsKey(product)) {
+        quantity[product] = 1;
+      } else {
+        quantity[product] += 1;
+      }
+    });
+    return quantity;
+  }
 
   // Total sum total available in the Cart
   double get subtotal =>
@@ -34,6 +51,5 @@ class Cart extends Equatable {
 
 
  
-  @override
-  List<Object?> get props => [products];
+  
 }

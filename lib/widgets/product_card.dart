@@ -3,7 +3,6 @@ import 'package:ecommerce_app/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
@@ -91,6 +90,10 @@ class ProductCard extends StatelessWidget {
                                 context
                                     .read<CartBloc>()
                                     .add(CartProductAdded(product));
+                                final snackBar = SnackBar(
+                                    content: Text('Agregado al Carro'));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
                               },
                             ),
                           );

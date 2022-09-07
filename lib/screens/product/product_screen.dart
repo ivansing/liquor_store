@@ -62,6 +62,9 @@ class ProductScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(primary: Colors.white),
                     onPressed: () {
                       context.read<CartBloc>().add(CartProductAdded(product));
+                      final snackBar =
+                          SnackBar(content: Text('Agregado al Carro'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       Navigator.pushNamed(context, '/cart');
                     },
                     child: Text(
