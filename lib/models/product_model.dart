@@ -16,12 +16,16 @@ class Product extends Equatable {
       required this.price,
       required this.isPopular,
       required this.isRecommended});
-
+ 
   @override
   List<Object?> get props =>
-      [name, category, imageUrl, price, isPopular, isRecommended];
+      [name, category, imageUrl, price, isPopular, isRecommended]; 
 
-  static Product fromSnapshot(DocumentSnapshot snapshot) {
+ 
+
+     
+
+ /*   static Product fromSnapshot(DocumentSnapshot snapshot) {
     Product product = Product(
       name: snapshot['name'],
       category: snapshot['category'],
@@ -31,9 +35,26 @@ class Product extends Equatable {
       isRecommended: snapshot['isRecommended'],
     );
     return product;
+  }  */
+
+
+  factory Product.fromSnapshot(DocumentSnapshot snapshot) {
+    return Product(
+      name: snapshot['name'],
+      category: snapshot['category'],
+      imageUrl: snapshot['imageUrl'],
+      price: snapshot['price'],
+      isPopular: snapshot['isPopular'],
+      isRecommended: snapshot['isRecommended']
+    );
   }
 
-  static List<Product> products = [
+
+
+
+  
+
+     static List<Product> products = [
     Product(
         name: 'Nectar Verde',
         category: 'Aguardientes',
@@ -82,5 +103,5 @@ class Product extends Equatable {
         price: 20000,
         isRecommended: true,
         isPopular: true),
-  ];
+  ];   
 }

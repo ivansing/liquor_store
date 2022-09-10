@@ -49,7 +49,7 @@ class CartProductCard extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.remove_circle),
                     onPressed: () {
-                      context.read<CartBloc>().add(CartProductRemoved(product));
+                      context.read<CartBloc>().add(RemovedProduct(product));
                     },
                   ),
                   Text(
@@ -59,7 +59,7 @@ class CartProductCard extends StatelessWidget {
                   IconButton(
                       icon: Icon(Icons.add_circle),
                       onPressed: () {
-                        context.read<CartBloc>().add(CartProductAdded(product));
+                        context.read<CartBloc>().add(AddProduct(product));
                       }),
                 ],
               );
