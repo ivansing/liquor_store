@@ -14,7 +14,12 @@ class ProductRepository extends BaseProductRepository {
         .collection('products')
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((doc) => Product.fromSnapshot(doc)).toList();
+      print(snapshot);
+
+      return snapshot.docs.map((doc) { 
+        print(doc);
+        return Product.fromSnapshot(doc);
+        }).toList();
     });
   }
 }

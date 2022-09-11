@@ -16,92 +16,24 @@ class Product extends Equatable {
       required this.price,
       required this.isPopular,
       required this.isRecommended});
- 
+
   @override
   List<Object?> get props =>
-      [name, category, imageUrl, price, isPopular, isRecommended]; 
-
- 
-
-     
-
- /*   static Product fromSnapshot(DocumentSnapshot snapshot) {
-    Product product = Product(
-      name: snapshot['name'],
-      category: snapshot['category'],
-      imageUrl: snapshot['imageUrl'],
-      price: snapshot['price'],
-      isPopular: snapshot['isPopular'],
-      isRecommended: snapshot['isRecommended'],
-    );
-    return product;
-  }  */
-
+      [name, category, imageUrl, price, isPopular, isRecommended];
 
   factory Product.fromSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+    // TODO: Si data es nulo, que se debe hacer?
+
     return Product(
-      name: snapshot['name'],
-      category: snapshot['category'],
-      imageUrl: snapshot['imageUrl'],
-      price: snapshot['price'],
-      isPopular: snapshot['isPopular'],
-      isRecommended: snapshot['isRecommended']
-    );
+        name: data.containsKey('name') ? data['name'] : '',
+        category: data.containsKey('category') ? data['category'] : '',
+        imageUrl: data.containsKey('imageUrl') ? data['imageUrl'] : '',
+        price: double.parse(
+            (data.containsKey('price') ? data['price'] : 0).toString()),
+        isPopular: data.containsKey('isPopular') ? data['isPopular'] : false,
+        isRecommended:
+            data.containsKey('isRecommended') ? data['isRecommended'] : false);
   }
-
-
-
-
-  
-
-     static List<Product> products = [
-    Product(
-        name: 'Nectar Verde',
-        category: 'Aguardientes',
-        imageUrl:
-            'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-        price: 33000,
-        isRecommended: true,
-        isPopular: false),
-    Product(
-        name: 'Sello Negro',
-        category: 'Whiskey',
-        imageUrl:
-            'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-        price: 82000,
-        isRecommended: true,
-        isPopular: false),
-    Product(
-        name: 'Poker',
-        category: 'Cervezas',
-        imageUrl:
-            'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-        price: 20000,
-        isRecommended: true,
-        isPopular: false),
-    Product(
-        name: 'Nectar Azul',
-        category: 'Aguardientes',
-        imageUrl:
-            'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-        price: 30000,
-        isRecommended: true,
-        isPopular: true),
-    Product(
-        name: 'Sello Rojo',
-        category: 'Whiskey',
-        imageUrl:
-            'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-        price: 85000,
-        isRecommended: true,
-        isPopular: true),
-    Product(
-        name: 'Aguila',
-        category: 'Cervezas',
-        imageUrl:
-            'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-        price: 20000,
-        isRecommended: true,
-        isPopular: true),
-  ];   
 }

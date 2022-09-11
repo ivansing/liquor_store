@@ -59,28 +59,41 @@ class HomeScreen extends StatelessWidget {
           SectionTitle(title: 'Recomendados'),
           BlocBuilder<ProductBloc, ProductState>(
             builder: (context, state) {
-               /* if (state is ProductLoading) {
+              if (state is ProductLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              }  */
+              }
 
-              //if (state is ProductLoaded) {
+              if (state is ProductLoaded) {
                 return ProductCarousel(
-                  products: Product.products
+                  products: state.products
                       .where((product) => product.isRecommended)
                       .toList(),
                 );
-            /*  } else {
+              } else {
                 return Text('Algo salio mal.');
-              }  */
+              }
             },
           ),
           SectionTitle(title: 'Mas Populares'),
-          ProductCarousel(
-              products: Product.products
-                  .where((product) => product.isPopular)
-                  .toList()),
+          BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              if (state is ProductLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is ProductLoaded) {
+                return ProductCarousel(
+                    products: state.products
+                        .where((product) => product.isPopular)
+                        .toList());
+              } else {
+                return Text('Algo salio mal.');
+              }
+            },
+          ),
         ],
       ),
     );
