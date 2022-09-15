@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/screens/screens.dart';
+
 import 'blocs/blocs.dart';
 import 'package:ecommerce_app/config/app_router.dart';
 import 'package:ecommerce_app/config/theme.dart';

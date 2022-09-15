@@ -25,59 +25,19 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: product.name),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: CustomNavBar(
+        screen: routeName,
+        product: product,
+      )
+
+      /* BottomAppBar(
         color: Colors.black,
         child: Container(
           height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                  icon: Icon(
-                    Icons.share,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {}),
-              BlocBuilder<WishlistBloc, WishlistState>(
-                builder: (context, state) {
-                  return IconButton(
-                      icon: Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        context
-                            .read<WishlistBloc>()
-                            .add(AddtWishlistProduct(product));
-
-                        final snackBar = SnackBar(
-                            content: Text('Se agrego a tu lista de deseos'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      });
-                },
-              ),
-              BlocBuilder<CartBloc, CartState>(
-                builder: (context, state) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.white),
-                    onPressed: () {
-                      context.read<CartBloc>().add(AddProduct(product));
-                      final snackBar =
-                          SnackBar(content: Text('Agregado al Carro'));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      Navigator.pushNamed(context, '/cart');
-                    },
-                    child: Text(
-                      'Agregar al Carro',
-                      style: Theme.of(context).textTheme.headline3!,
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
+          child: AddToCartNavBar(product: product),
         ),
-      ),
+      ) */
+      ,
       body: ListView(
         children: [
           CarouselSlider(

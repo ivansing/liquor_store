@@ -22,7 +22,7 @@ class CategoryScreen extends StatelessWidget {
     //
     return Scaffold(
       appBar: CustomAppBar(title: category.name),
-      bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar: CustomNavBar(screen: routeName),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state is ProductLoading) {

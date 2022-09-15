@@ -2,12 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/blocs/category/category_bloc.dart';
 import 'package:ecommerce_app/blocs/product/product_bloc.dart';
-import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/product/product_repository.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/';
@@ -25,8 +24,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: CustomAppBar(title: 'LICORERIA'),
-      bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar: CustomNavBar(screen: routeName),
       body: Column(
         children: [
           Container(
