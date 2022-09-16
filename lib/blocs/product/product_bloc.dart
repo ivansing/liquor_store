@@ -10,8 +10,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository _productRepository;
   StreamSubscription? _productSubscription;
 
-  ProductBloc({required ProductRepository productRepository})
-      : _productRepository = productRepository,
+  ProductBloc({
+    required ProductRepository productRepository,
+  })  : _productRepository = productRepository,
         super(ProductLoading()) {
     on<LoadProducts>(_onLoadProducts);
     on<UpdateProducts>(_onUpdateProducts);

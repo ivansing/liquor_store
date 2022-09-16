@@ -1,3 +1,6 @@
+import 'package:ecommerce_app/models/models.dart';
+import 'package:ecommerce_app/repositories/checkout/checkout_repository.dart';
+
 import 'blocs/blocs.dart';
 import 'package:ecommerce_app/config/app_router.dart';
 import 'package:ecommerce_app/config/theme.dart';
@@ -9,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -23,8 +25,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => WishlistBloc()..add(LoadWishList())),
-        BlocProvider(create: (_) => CartBloc()..add(LoadCart())),
+        
+        BlocProvider(
+          create: (_) => CartBloc()
+            ..add(
+              LoadCart(),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => CheckoutBloc(
+            cartBloc: context.read<CartBloc>(),
+            checkoutRepository: CheckoutRepository(),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => WishlistBloc()
+            ..add(
+              LoadWishList(),
+            ),
+        ),
+        
         BlocProvider(
           create: (_) => CategoryBloc(
             categoryRepository: CategoryRepository(),
@@ -36,15 +56,13 @@ class MyApp extends StatelessWidget {
           )..add(LoadProducts()),
         )
       ],
-      
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Licoreria App',
-          theme: theme(),
-          onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: SplashScreen.routeName,
-        ),
-      
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Licoreria App',
+        theme: theme(),
+        onGenerateRoute: AppRouter.onGenerateRoute,
+        initialRoute: SplashScreen.routeName,
+      ),
     );
   }
 }

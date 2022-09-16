@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/blocs/checkout/checkout_bloc.dart';
 import 'package:ecommerce_app/widgets/order_summary.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutScreen extends StatelessWidget {
   static const String routeName = '/checkout';
@@ -14,45 +16,79 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
+    /* final TextEditingController emailController = TextEditingController();
     final TextEditingController nameController = TextEditingController();
     final TextEditingController addressController = TextEditingController();
-    final TextEditingController cityController = TextEditingController();
+    final TextEditingController cityController = TextEditingController(); */
 
     return Scaffold(
       appBar: CustomAppBar(title: 'Checkout'),
       bottomNavigationBar: CustomNavBar(screen: routeName),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'INFORMACIÓN USUARIO',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            _buildTextFormField(emailController, context, 'Email'),
-            _buildTextFormField(nameController, context, 'Nombre Completo'),
-            Text(
-              'INFORMACIÓN ENVIO',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            _buildTextFormField(addressController, context, 'Dirección'),
-            _buildTextFormField(cityController, context, 'Ciudad'),
-            Text(
-              'RESUMEN PEDIDO',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            OrderSummary(),
-          ],
+        child: SingleChildScrollView(
+          child: BlocBuilder<CheckoutBloc, CheckoutState>(
+            builder: (context, state) {
+              if (state is CheckoutLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is CheckoutLoaded) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'INFORMACIÓN USUARIO',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    _buildTextFormField((value) {
+                      context.read<CheckoutBloc>().add(
+                            UpdateCheckout(email: value),
+                          );
+                    }, context, 'Email'),
+                    _buildTextFormField(
+                        (value) {
+                      context.read<CheckoutBloc>().add(
+                            UpdateCheckout(fullName: value),
+                          );
+                    }, context, 'Nombre Completo'),
+                    Text(
+                      'INFORMACIÓN ENVIO',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    _buildTextFormField(
+                        (value) {
+                      context.read<CheckoutBloc>().add(
+                            UpdateCheckout(address: value),
+                          );
+                    }, context, 'Dirección'),
+                    _buildTextFormField((value) {
+                      context.read<CheckoutBloc>().add(
+                            UpdateCheckout(city: value),
+                          );
+                    }, context, 'Ciudad'),
+                    Text(
+                      'RESUMEN PEDIDO',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    OrderSummary(),
+                  ],
+                );
+              } else {
+                return Text('Algo salio mal.');
+              }
+            },
+          ),
         ),
       ),
     );
   }
 
   Padding _buildTextFormField(
-    TextEditingController controller,
+    Function(String)? onChanged,
+    //TextEditingController controller,
     BuildContext context,
     String labelText,
   ) {
@@ -69,7 +105,8 @@ class CheckoutScreen extends StatelessWidget {
           ),
           Expanded(
             child: TextFormField(
-              controller: controller,
+              onChanged: onChanged,
+              //controller: controller,
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: const EdgeInsets.only(left: 10),

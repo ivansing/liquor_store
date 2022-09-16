@@ -164,18 +164,33 @@ class OrderNowNavBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            shape: RoundedRectangleBorder(),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/checkout');
+        BlocBuilder<CheckoutBloc, CheckoutState>(
+          builder: (context, state) {
+            if (state is CheckoutLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is CheckoutLoaded) {
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(),
+                ),
+                onPressed: () {
+                  context
+                      .read<CheckoutBloc>()
+                      .add(ConfirmCheckout(checkout: state.checkout));
+                },
+                child: Text(
+                  'ESCOGER METODO DE PAGO',
+                  style: Theme.of(context).textTheme.headline3!,
+                ),
+              );
+            } else {
+              return Text('Algo salio mal.');
+            }
           },
-          child: Text(
-            'ESCOGER METODO DE PAGO',
-            style: Theme.of(context).textTheme.headline3!,
-          ),
         )
       ],
     );
