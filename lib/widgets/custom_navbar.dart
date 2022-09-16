@@ -183,7 +183,7 @@ class OrderNowNavBar extends StatelessWidget {
                       .add(ConfirmCheckout(checkout: state.checkout));
                 },
                 child: Text(
-                  'ESCOGER METODO DE PAGO',
+                  'HACER PEDIDO',
                   style: Theme.of(context).textTheme.headline3!,
                 ),
               );

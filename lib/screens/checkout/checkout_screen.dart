@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/blocs/checkout/checkout_bloc.dart';
+import 'package:ecommerce_app/config/theme.dart';
 import 'package:ecommerce_app/widgets/order_summary.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,6 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /* final TextEditingController emailController = TextEditingController();
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController addressController = TextEditingController();
-    final TextEditingController cityController = TextEditingController(); */
-
     return Scaffold(
       appBar: CustomAppBar(title: 'Checkout'),
       bottomNavigationBar: CustomNavBar(screen: routeName),
@@ -43,23 +39,24 @@ class CheckoutScreen extends StatelessWidget {
                       'INFORMACIÓN USUARIO',
                       style: Theme.of(context).textTheme.headline3,
                     ),
+                    SizedBox(height: 30),
                     _buildTextFormField((value) {
                       context.read<CheckoutBloc>().add(
                             UpdateCheckout(email: value),
                           );
                     }, context, 'Email'),
-                    _buildTextFormField(
-                        (value) {
+                    _buildTextFormField((value) {
                       context.read<CheckoutBloc>().add(
                             UpdateCheckout(fullName: value),
                           );
                     }, context, 'Nombre Completo'),
+                    SizedBox(height: 20),
                     Text(
                       'INFORMACIÓN ENVIO',
                       style: Theme.of(context).textTheme.headline3,
                     ),
-                    _buildTextFormField(
-                        (value) {
+                    SizedBox(height: 20),
+                    _buildTextFormField((value) {
                       context.read<CheckoutBloc>().add(
                             UpdateCheckout(address: value),
                           );
@@ -69,6 +66,45 @@ class CheckoutScreen extends StatelessWidget {
                             UpdateCheckout(city: value),
                           );
                     }, context, 'Ciudad'),
+                    SizedBox(height: 20),
+                    Container(
+                      height: 60,
+                      alignment: Alignment.bottomCenter,
+                      decoration: BoxDecoration(color: Colors.black),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/',
+                                  );
+                                },
+                                child: Text(
+                                  'SELECIONAR UN METODO DE PAGO',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline3!
+                                      .copyWith(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30),
                     Text(
                       'RESUMEN PEDIDO',
                       style: Theme.of(context).textTheme.headline3,
