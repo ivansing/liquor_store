@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/blocs/cart/cart_bloc.dart';
 import 'package:ecommerce_app/models/models.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class ProductCard extends StatelessWidget {
       {Key? key,
       required this.product,
       this.widthFactor = 2.5,
-      this.leftPosition = 10,
+      this.leftPosition = 5,
       this.isWishlist = false})
       : super(key: key);
 
@@ -21,29 +22,33 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/product', arguments: product);
+        Navigator.pushNamed(
+          context,
+          '/product',
+          arguments: product,
+        );
       },
       child: Stack(
         children: [
           Container(
             width: MediaQuery.of(context).size.width / widthFactor,
-            height: 165,
+            height: 150,
             child: Image.network(
               product.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            top: 80,
+            top: 60,
             left: leftPosition,
             child: Container(
-              width: MediaQuery.of(context).size.width / 2.1 - 10,
-              height: 55,
+              width: MediaQuery.of(context).size.width / 2.5 - 10,
+              height: 80,
               decoration: BoxDecoration(
                 color: Colors.black38,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -57,7 +62,7 @@ class ProductCard extends StatelessWidget {
                               product.name,
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline4!
+                                  .headline5!
                                   .copyWith(color: Colors.white),
                             ),
                             Text(
@@ -86,7 +91,7 @@ class ProductCard extends StatelessWidget {
                               icon: Icon(
                                 Icons.add_circle,
                                 color: Colors.white,
-                                size: 20,
+                                
                               ),
                               onPressed: () {
                                 context
@@ -106,16 +111,21 @@ class ProductCard extends StatelessWidget {
                     ),
                     isWishlist
                         ? Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(right: 30.0),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
-                                onPressed: () {},
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.remove_circle,
+                                color: Colors.white,
+                                size: 20,
                               ),
+                              onPressed: () {
+                                context
+                                    .read<WishlistBloc>()
+                                    .add(RemovetWishlistProduct(product));
+                                final snackBar = SnackBar(
+                                    content: Text('Se quito de tu lista de deseos'));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              },
                             ),
                           )
                         : SizedBox(),

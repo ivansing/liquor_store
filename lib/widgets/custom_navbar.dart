@@ -190,6 +190,7 @@ class OrderNowNavBar extends StatelessWidget {
             } else {
               return Text('Algo salio mal.');
             }
+            
           },
         )
       ],

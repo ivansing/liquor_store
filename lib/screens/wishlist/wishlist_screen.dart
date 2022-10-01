@@ -26,9 +26,11 @@ class WishlistScreen extends StatelessWidget {
           }
           if (state is WishlistLoaded) {
             return GridView.builder(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 16.0,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1, childAspectRatio: 2.4),
               itemCount: state.wishlist.products.length,
               itemBuilder: (BuildContext context, int index) {
@@ -36,7 +38,7 @@ class WishlistScreen extends StatelessWidget {
                   child: ProductCard(
                     product: state.wishlist.products[index],
                     widthFactor: 1.1,
-                    leftPosition: 120,
+                    leftPosition: 100,
                     isWishlist: true,
                   ),
                 );

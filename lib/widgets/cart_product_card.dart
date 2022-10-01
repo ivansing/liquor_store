@@ -19,11 +19,13 @@ class CartProductCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
-          Image.network(product.imageUrl,
-              width: 100, height: 80, fit: BoxFit.cover),
-          SizedBox(
-            width: 10,
+          Image.network(
+            product.imageUrl,
+            width: 100,
+            height: 80,
+            fit: BoxFit.cover,
           ),
+          SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,9 +41,7 @@ class CartProductCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
               return Row(

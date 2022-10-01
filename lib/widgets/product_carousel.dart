@@ -13,15 +13,15 @@ class ProductCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
+    return Align(
+      alignment: Alignment.topLeft,
       child: SizedBox(
        height: 165,
        child: ListView.builder(
          shrinkWrap: true,
          padding: const EdgeInsets.symmetric(
            horizontal: 20.0, 
-           vertical: 6.0
+           vertical: 10.0,
          ),
          scrollDirection: Axis.horizontal,
          itemCount: products.length,

@@ -12,7 +12,7 @@ ThemeData theme() {
 TextTheme textTheme() {
   return TextTheme(
     headline1: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontSize: 34,
       fontFamily: 'Avenir',
       fontWeight: FontWeight.bold

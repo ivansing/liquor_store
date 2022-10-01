@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/blocs/cart/cart_bloc.dart';
+import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ class CartScreen extends StatelessWidget {
                     Column(
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ElevatedButton(
                               onPressed: () {
@@ -58,6 +59,7 @@ class CartScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                        
                         SizedBox(height: 5),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.4,
@@ -95,3 +97,5 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
+
+

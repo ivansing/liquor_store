@@ -82,8 +82,8 @@ class ProductScreen extends StatelessWidget {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 1.8,
-              viewportFraction: 0.7,
+              aspectRatio: 1.5,
+              viewportFraction: 0.9,
               enlargeCenterPage: true,
               enlargeStrategy: CenterPageEnlargeStrategy.height,
             ),
