@@ -13,7 +13,7 @@ TextTheme textTheme() {
   return TextTheme(
     headline1: TextStyle(
       color: Colors.white,
-      fontSize: 34,
+      fontSize: 30,
       fontFamily: 'Avenir',
       fontWeight: FontWeight.bold
     ),

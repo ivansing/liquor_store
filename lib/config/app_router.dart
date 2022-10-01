@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/models/category_model.dart';
+import 'package:ecommerce_app/screens/order_confirmation/order_confirmation_screen.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,9 @@ class AppRouter {
 
       case CheckoutScreen.routeName:
         return CheckoutScreen.route();
+
+      case OrderConfirmation.routeName:
+        return OrderConfirmation.route();  
 
       default:
         return _errorRoute();

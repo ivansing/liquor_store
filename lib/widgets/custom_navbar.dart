@@ -181,6 +181,8 @@ class OrderNowNavBar extends StatelessWidget {
                   context
                       .read<CheckoutBloc>()
                       .add(ConfirmCheckout(checkout: state.checkout));
+
+                  Navigator.pushNamed(context, '/order-confirmation');    
                 },
                 child: Text(
                   'HACER PEDIDO',
@@ -190,7 +192,6 @@ class OrderNowNavBar extends StatelessWidget {
             } else {
               return Text('Algo salio mal.');
             }
-            
           },
         )
       ],

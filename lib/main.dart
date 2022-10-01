@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/checkout/checkout_repository.dart';
+import 'package:ecommerce_app/screens/screens.dart';
+import 'package:ecommerce_app/simple_bloc_observer.dart';
 
 import 'blocs/blocs.dart';
 import 'package:ecommerce_app/config/app_router.dart';
@@ -15,9 +17,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  
-  
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () {
+      runApp(const MyApp());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +33,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        
         BlocProvider(
           create: (_) => CartBloc()
             ..add(
@@ -47,7 +51,6 @@ class MyApp extends StatelessWidget {
               LoadWishList(),
             ),
         ),
-        
         BlocProvider(
           create: (_) => CategoryBloc(
             categoryRepository: CategoryRepository(),
@@ -64,7 +67,7 @@ class MyApp extends StatelessWidget {
         title: 'Licoreria App',
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: SplashScreen.routeName,
+        initialRoute: OrderConfirmation.routeName,
       ),
     );
   }

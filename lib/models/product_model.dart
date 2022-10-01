@@ -9,7 +9,7 @@ class Product extends Equatable {
   final bool isRecommended;
   final bool isPopular;
 
-  Product(
+  const Product(
       {required this.name,
       required this.category,
       required this.imageUrl,
@@ -21,11 +21,16 @@ class Product extends Equatable {
   List<Object?> get props =>
       [name, category, imageUrl, price, isPopular, isRecommended];
 
+     
+
+      
+
   factory Product.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
-    // TODO: Si data es nulo, que se debe hacer?
+    
 
+    //  If data is null, check the data type
     return Product(
         name: data.containsKey('name') ? data['name'] : '',
         category: data.containsKey('category') ? data['category'] : '',
@@ -36,4 +41,10 @@ class Product extends Equatable {
         isRecommended:
             data.containsKey('isRecommended') ? data['isRecommended'] : false);
   }
+
+  
 }
+
+
+ 
+
