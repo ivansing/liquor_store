@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/models/models.dart';
+import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -172,7 +173,8 @@ class OrderNowNavBar extends StatelessWidget {
               );
             }
             if (state is CheckoutLoaded) {
-              return ElevatedButton(
+               
+               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   shape: RoundedRectangleBorder(),
@@ -188,7 +190,7 @@ class OrderNowNavBar extends StatelessWidget {
                   'HACER PEDIDO',
                   style: Theme.of(context).textTheme.headline3!,
                 ),
-              );
+              ); 
             } else {
               return Text('Algo salio mal.');
             }

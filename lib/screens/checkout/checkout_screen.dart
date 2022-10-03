@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/blocs/checkout/checkout_bloc.dart';
-import 'package:ecommerce_app/config/theme.dart';
-import 'package:ecommerce_app/widgets/order_summary.dart';
+import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,9 +79,7 @@ class CheckoutScreen extends StatelessWidget {
                               child: TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                    context,
-                                    '/',
-                                  );
+                                      context, '/payment-selection');
                                 },
                                 child: Text(
                                   'SELECIONAR UN METODO DE PAGO',

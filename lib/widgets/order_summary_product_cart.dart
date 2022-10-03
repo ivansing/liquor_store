@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/models/models.dart';
 import 'package:flutter/material.dart';
 
 import '../models/test_product_model.dart';
@@ -7,8 +8,10 @@ class OrderSummaryProductCart extends StatelessWidget {
     Key? key,
     required this.product,
     required this.quantity,
+    
   }) : super(key: key);
 
+  
   final TestProductModel product;
   final int quantity;
 
