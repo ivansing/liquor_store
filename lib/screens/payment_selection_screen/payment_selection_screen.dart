@@ -47,7 +47,7 @@ class PaymentSelection extends StatelessWidget {
                                           paymentMethod:
                                               PaymentMethod.credit_card),
                                     );
-                                Navigator.pop(context);
+                                Navigator.pushNamed(context, '/order-confirmation');
                               },
                               child: Text('Pagar'),
                             ),

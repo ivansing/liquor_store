@@ -38,32 +38,45 @@ class CheckoutScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     SizedBox(height: 30),
-                    _buildTextFormField((value) {
-                      context.read<CheckoutBloc>().add(
-                            UpdateCheckout(email: value),
-                          );
-                    }, context, 'Email'),
-                    _buildTextFormField((value) {
-                      context.read<CheckoutBloc>().add(
-                            UpdateCheckout(fullName: value),
-                          );
-                    }, context, 'Nombre Completo'),
+                    CustomTextFormField(
+                        onChanged: (value) {
+                          context.read<CheckoutBloc>().add(
+                                UpdateCheckout(email: value),
+                              );
+                        },
+                        context: context,
+                        title: 'Email'),
+                        
+                    CustomTextFormField(
+                        onChanged: (value) {
+                          context.read<CheckoutBloc>().add(
+                                UpdateCheckout(fullName: value),
+                              );
+                        },
+                        context: context,
+                        title: 'Nombre Completo'),
                     SizedBox(height: 20),
                     Text(
                       'INFORMACIÓN ENVIO',
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     SizedBox(height: 20),
-                    _buildTextFormField((value) {
-                      context.read<CheckoutBloc>().add(
-                            UpdateCheckout(address: value),
-                          );
-                    }, context, 'Dirección'),
-                    _buildTextFormField((value) {
-                      context.read<CheckoutBloc>().add(
-                            UpdateCheckout(city: value),
-                          );
-                    }, context, 'Ciudad'),
+                    CustomTextFormField(
+                        onChanged: (value) {
+                          context.read<CheckoutBloc>().add(
+                                UpdateCheckout(address: value),
+                              );
+                        },
+                        context: context,
+                        title: 'Dirección'),
+                    CustomTextFormField(
+                        onChanged: (value) {
+                          context.read<CheckoutBloc>().add(
+                                UpdateCheckout(city: value),
+                              );
+                        },
+                        context: context,
+                        title: 'Ciudad'),
                     SizedBox(height: 20),
                     /* Container(
                       height: 60,
@@ -114,43 +127,6 @@ class CheckoutScreen extends StatelessWidget {
             },
           ),
         ),
-      ),
-    );
-  }
-
-  Padding _buildTextFormField(
-    Function(String)? onChanged,
-    //TextEditingController controller,
-    BuildContext context,
-    String labelText,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 75,
-            child: Text(
-              labelText,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              onChanged: onChanged,
-              //controller: controller,
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: const EdgeInsets.only(left: 10),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
       ),
     );
   }

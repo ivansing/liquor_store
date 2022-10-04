@@ -82,12 +82,12 @@ class OrderConfirmation extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      OrderSummaryProductCart(product:
-                        TestProductModel.products[0],
+                      ProductCard.summary(product:
+                        Product.products[0],
                         quantity: 2,
                       ),
-                      OrderSummaryProductCart(product:
-                        TestProductModel.products[2],
+                      ProductCard.summary(product:
+                        Product.products[2],
                         quantity: 2,
                       )
                     ],

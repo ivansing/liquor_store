@@ -94,13 +94,14 @@ class AddToCartNavBar extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Se agrego a tu lista de deseos'),
+                    ),
+                  );
                   context
                       .read<WishlistBloc>()
                       .add(AddtWishlistProduct(product));
-
-                  final snackBar =
-                      SnackBar(content: Text('Se agrego a tu lista de deseos'));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 });
           },
         ),
@@ -172,8 +173,7 @@ class OrderNowNavBar extends StatelessWidget {
               );
             }
             if (state is CheckoutLoaded) {
-               
-               return ElevatedButton(
+              return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   shape: RoundedRectangleBorder(),
@@ -183,13 +183,13 @@ class OrderNowNavBar extends StatelessWidget {
                       .read<CheckoutBloc>()
                       .add(ConfirmCheckout(checkout: state.checkout));
 
-                  Navigator.pushNamed(context, '/payment-selection');    
+                  Navigator.pushNamed(context, '/payment-selection');
                 },
                 child: Text(
                   'METODO DE PAGO',
                   style: Theme.of(context).textTheme.headline3!,
                 ),
-              ); 
+              );
             } else {
               return Text('Algo salio mal.');
             }

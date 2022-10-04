@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
         title: 'Licoreria App',
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: PaymentSelection.routeName,
+        initialRoute: OrderConfirmation.routeName,
       ),
     );
   }

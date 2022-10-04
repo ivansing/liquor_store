@@ -46,7 +46,7 @@ class CategoryScreen extends StatelessWidget {
               itemCount: categoryProducts.length,
               itemBuilder: (BuildContext context, int index) {
                 return Center(
-                  child: ProductCard(
+                  child: ProductCard.category(
                     product: categoryProducts[index],
                     widthFactor: 2.2,
                   ),

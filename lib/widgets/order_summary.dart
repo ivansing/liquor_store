@@ -22,8 +22,8 @@ class OrderSummary extends StatelessWidget {
               Divider(thickness: 2),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 10.0,
+                  horizontal: 20,
+                  vertical: 5.0,
                 ),
                 child: Column(
                   children: [
