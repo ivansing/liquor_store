@@ -19,6 +19,7 @@ class CheckoutLoaded extends CheckoutState {
   final String? deliveryFee;
   final String? total;
   final Checkout checkout;
+  final PaymentMethod paymentMethod;
 
   CheckoutLoaded({
     this.fullName,
@@ -29,6 +30,7 @@ class CheckoutLoaded extends CheckoutState {
     this.subtotal,
     this.deliveryFee,
     this.total,
+    this.paymentMethod = PaymentMethod.credit_card,
   }) : checkout = Checkout(
           fullName: fullName,
           email: email,
@@ -38,6 +40,7 @@ class CheckoutLoaded extends CheckoutState {
           subtotal: subtotal,
           deliveryFee: deliveryFee,
           total: total,
+          
         );
 
   @override
@@ -50,5 +53,6 @@ class CheckoutLoaded extends CheckoutState {
         subtotal,
         deliveryFee,
         total,
+        paymentMethod,
       ];
 }

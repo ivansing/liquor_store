@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/blocs/checkout/checkout_bloc.dart';
-import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,7 +65,7 @@ class CheckoutScreen extends StatelessWidget {
                           );
                     }, context, 'Ciudad'),
                     SizedBox(height: 20),
-                    Container(
+                    /* Container(
                       height: 60,
                       alignment: Alignment.bottomCenter,
                       decoration: BoxDecoration(color: Colors.black),
@@ -100,7 +99,7 @@ class CheckoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
+                    ), */
                     SizedBox(height: 30),
                     Text(
                       'RESUMEN PEDIDO',

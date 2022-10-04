@@ -40,8 +40,15 @@ class MyApp extends StatelessWidget {
             ),
         ),
         BlocProvider(
+          create: (_) => PaymentBloc()
+            ..add(
+              LoadPaymentMethod(),
+            ),
+        ),
+        BlocProvider(
           create: (context) => CheckoutBloc(
             cartBloc: context.read<CartBloc>(),
+            paymentBloc: context.read<PaymentBloc>(),
             checkoutRepository: CheckoutRepository(),
           ),
         ),

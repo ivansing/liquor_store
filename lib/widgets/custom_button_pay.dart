@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/widgets/widgets.dart';
 
 class CustomButtonPay extends StatelessWidget {
   final String title;
@@ -18,8 +19,10 @@ class CustomButtonPay extends StatelessWidget {
             Center(
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/payment-selection');
+                  Navigator.pushNamed(context, '');
+                  
                 },
+                
                 child: Text(
                   title,
                   style: Theme.of(context)
@@ -33,5 +36,9 @@ class CustomButtonPay extends StatelessWidget {
         ),
       ),
     );
+     
   }
+
+  
 }
+
