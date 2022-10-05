@@ -1,7 +1,10 @@
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/checkout/checkout_repository.dart';
+import 'package:ecommerce_app/repositories/local_storage/local_storage_repository.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/simple_bloc_observer.dart';
+
+import 'package:hive_flutter/adapters.dart';
 
 import 'blocs/blocs.dart';
 import 'package:ecommerce_app/config/app_router.dart';
@@ -16,6 +19,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  // TODO fix hive [Error: No implementation found for method 
+  //getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider]
+  /* await Hive.initFlutter();
+  Hive..registerAdapter(ProductAdapter()); */
 
   BlocOverrides.runZoned(
     () {
@@ -53,8 +61,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (_) => WishlistBloc()
-            ..add(
+          create: (_) => WishlistBloc(
+            
+          )..add(
               LoadWishList(),
             ),
         ),
@@ -74,7 +83,7 @@ class MyApp extends StatelessWidget {
         title: 'Licoreria App',
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: OrderConfirmation.routeName,
+        initialRoute: SplashScreen.routeName,
       ),
     );
   }
