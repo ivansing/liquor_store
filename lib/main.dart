@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/checkout/checkout_repository.dart';
 import 'package:ecommerce_app/repositories/local_storage/local_storage_repository.dart';
+import 'package:ecommerce_app/repositories/repositories.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/simple_bloc_observer.dart';
 
@@ -20,7 +22,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  // TODO fix hive [Error: No implementation found for method 
+  // TODO fix hive [Error: No implementation found for method
   //getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider]
   /* await Hive.initFlutter();
   Hive..registerAdapter(ProductAdapter()); */
@@ -39,51 +41,72 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => CartBloc()
-            ..add(
-              LoadCart(),
+
+    // Check user auth
+    return MaterialApp(
+      title: 'Licoreria',
+      debugShowCheckedModeBanner: false,
+      theme: theme(),
+      home: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(
+            create: (context) => AuthRepository(),
+          ),
+          RepositoryProvider(
+            create: (context) => UserRepository(),
+          ),
+        ],
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AuthBloc(
+                  authRepository: context.read<AuthRepository>(),
+                  userRepository: context.read<UserRepository>()),
             ),
-        ),
-        BlocProvider(
-          create: (_) => PaymentBloc()
-            ..add(
-              LoadPaymentMethod(),
+            BlocProvider(
+              create: (_) => CartBloc()
+                ..add(
+                  LoadCart(),
+                ),
             ),
-        ),
-        BlocProvider(
-          create: (context) => CheckoutBloc(
-            cartBloc: context.read<CartBloc>(),
-            paymentBloc: context.read<PaymentBloc>(),
-            checkoutRepository: CheckoutRepository(),
+            BlocProvider(
+              create: (_) => PaymentBloc()
+                ..add(
+                  LoadPaymentMethod(),
+                ),
+            ),
+            BlocProvider(
+              create: (context) => CheckoutBloc(
+                cartBloc: context.read<CartBloc>(),
+                paymentBloc: context.read<PaymentBloc>(),
+                checkoutRepository: CheckoutRepository(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => WishlistBloc()
+                ..add(
+                  LoadWishList(),
+                ),
+            ),
+            BlocProvider(
+              create: (_) => CategoryBloc(
+                categoryRepository: CategoryRepository(),
+              )..add(LoadCategories()),
+            ),
+            BlocProvider(
+              create: (_) => ProductBloc(
+                productRepository: ProductRepository(),
+              )..add(LoadProducts()),
+            )
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Licoreria App',
+            theme: theme(),
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            initialRoute: SplashScreen.routeName,
           ),
         ),
-        BlocProvider(
-          create: (_) => WishlistBloc(
-            
-          )..add(
-              LoadWishList(),
-            ),
-        ),
-        BlocProvider(
-          create: (_) => CategoryBloc(
-            categoryRepository: CategoryRepository(),
-          )..add(LoadCategories()),
-        ),
-        BlocProvider(
-          create: (_) => ProductBloc(
-            productRepository: ProductRepository(),
-          )..add(LoadProducts()),
-        )
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Licoreria App',
-        theme: theme(),
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: SplashScreen.routeName,
       ),
     );
   }

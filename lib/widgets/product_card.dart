@@ -284,25 +284,27 @@ class ProductInformation extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              product.name,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5!
-                  .copyWith(color: Colors.white),
-            ),
-            Text(
-              '\$${product.price}',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6!
-                  .copyWith(color: Colors.white),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                product.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(color: Colors.white),
+              ),
+              Text(
+                '\$${product.price}',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(color: Colors.white),
+              ),
+            ],
+          ),
         ),
         isOrderSummary
             ? Text(

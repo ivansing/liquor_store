@@ -46,6 +46,7 @@ dependencies:
   hive_flutter: ^1.1.0
   path_provider: ^2.0.9
   firebase_auth: ^3.11.1
+  formz: ^0.4.1
 
 dev_dependencies:
   flutter_test:

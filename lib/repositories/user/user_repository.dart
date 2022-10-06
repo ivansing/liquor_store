@@ -1,9 +1,9 @@
-import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/models/user_model.dart';
 
 
-import '../../models/user_model.dart';
+
 import 'base_user_repository.dart';
 
 class UserRepository extends BaseUserRepository {
@@ -19,8 +19,8 @@ class UserRepository extends BaseUserRepository {
   Future<void> createUser(User user) async {
     await _firebaseFirestore
         .collection('users')
-        .doc(user.id)
-        .set(user.toDocument());  
+        .doc(user.id);
+        //.set(user.toDocument());  
   }
 
   @override
@@ -35,12 +35,12 @@ class UserRepository extends BaseUserRepository {
 
   @override
   Future<void> updateUser(User user) async {
-    return _firebaseFirestore
+     return _firebaseFirestore
         .collection('users')
         .doc(user.id)
         .update(user.toDocument())
         .then(
           (value) => print('User document updated.'),
-        );
+        ); 
   }
 }

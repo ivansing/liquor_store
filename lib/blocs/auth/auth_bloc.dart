@@ -5,7 +5,7 @@ import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/auth/auth_repository.dart';
 import 'package:ecommerce_app/repositories/user/user_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -35,20 +35,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
   }
-}
 
-void _onAuthUserChanged(
-  AuthUserChanged event,
-  Emitter<AuthState> emit,
-) {
-  event.authUser != null
-  ? emit(AuthState.authenticated(authUser: event.authUser!, user: event.user!))
-  : emit(AuthState.unauthenticated());
-}
+  
+  void _onAuthUserChanged(
+    AuthUserChanged event,
+    Emitter<AuthState> emit,
+  ) {
+    event.authUser != null
+        ? emit(AuthState.authenticated(
+            authUser: event.authUser!, user: event.user!))
+        : emit(AuthState.unauthenticated());
+  }
 
-@override 
-Future<void> close() {
-  _authUserSubscription?.cancel();
-  _userSubscription?.cancel();
-  return super.close();
+  @override
+  Future<void> close() {
+    _authUserSubscription?.cancel();
+    _userSubscription?.cancel();
+    return super.close();
+  }
 }

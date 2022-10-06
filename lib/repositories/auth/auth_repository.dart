@@ -1,31 +1,30 @@
-
-
-import 'package:ecommerce_app/repositories/auth/base_auth_repository.dart';
-
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
-class AuthRepository extends BaseAuthRepository {
+class AuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
 
   AuthRepository({auth.FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
+  // User changes emit current user
   @override
-  Future<auth.User?> signUp({
+  Stream<auth.User?> get user => _firebaseAuth.userChanges();
+
+  // Create new User with email and password
+  @override
+  Future<void> signUp({
     required String email,
     required String password,
   }) async {
     try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-
-      final user = credential.user;
-      return user;
     } catch (_) {}
   }
 
+  // SignIn with Email and Password
   @override
   Future<void> logInWithEmailAndPassword({
     required String email,
@@ -39,10 +38,8 @@ class AuthRepository extends BaseAuthRepository {
     } catch (_) {}
   }
 
-  @override 
-  Stream<auth.User?> get user => _firebaseAuth.userChanges();
-
-  @override 
+// Sign out the current user
+  @override
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
