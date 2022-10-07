@@ -16,14 +16,14 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Carrito'),
-      bottomNavigationBar: CustomNavBar(
+      appBar: const CustomAppBar(title: 'Carrito'),
+      bottomNavigationBar: const CustomNavBar(
         screen: routeName,
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           if (state is CartLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -47,7 +47,7 @@ class CartScreen extends StatelessWidget {
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.black,
-                                  shape: RoundedRectangleBorder(),
+                                  shape: const RoundedRectangleBorder(),
                                   elevation: 0),
                               child: Text(
                                 'Agregar mas Articulos',
@@ -59,7 +59,7 @@ class CartScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.4,
                           child: ListView.builder(
@@ -74,13 +74,13 @@ class CartScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    OrderSummary(),
+                  const OrderSummary(),
                   ],
                 ),
               ),
             );
           } else {
-            return Text('Algo salio mal');
+            return const Text('Algo salio mal');
           }
         },
       ),

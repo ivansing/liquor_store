@@ -79,7 +79,7 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (isCategory || isWishlist)
-          Navigator.pushNamed(
+         Navigator.pushNamed(
             context,
             '/product',
             arguments: product,
@@ -194,7 +194,7 @@ class ProductActions extends StatelessWidget {
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         if (state is CartLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(color: Colors.white),
           );
         }
@@ -206,7 +206,7 @@ class ProductActions extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+              const  SnackBar(
                   content: Text('Agregado a tu carro!'),
                 ),
               );
@@ -221,7 +221,7 @@ class ProductActions extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+              const  SnackBar(
                   content: Text('Borrado del carro!'),
                 ),
               );
@@ -236,8 +236,8 @@ class ProductActions extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Borrado de la lista de deseos!'),
+              const SnackBar(
+                  content:  Text('Borrado de la lista de deseos!'),
                 ),
               );
               context.read<WishlistBloc>().add(RemovetWishlistProduct(product));
@@ -256,10 +256,10 @@ class ProductActions extends StatelessWidget {
           } else if (isCart) {
             return Row(children: [removeProduct, productQuantity, addProduct]);
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         } else {
-          return Text('Algo salio mal.');
+          return const Text('Algo salio mal.');
         }
       },
     );
@@ -334,7 +334,7 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: adjWidth,
       height: height,
       child: Image.network(
@@ -362,7 +362,7 @@ class ProductBackground extends StatelessWidget {
       height: 80,
       margin: const EdgeInsets.only(bottom: 5),
       alignment: Alignment.bottomCenter,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.black38,
       ),
       child: Container(
@@ -370,7 +370,7 @@ class ProductBackground extends StatelessWidget {
         height: 70,
         margin: const EdgeInsets.only(bottom: 5),
         alignment: Alignment.bottomCenter,
-        decoration: BoxDecoration(color: Colors.black38),
+        decoration:const BoxDecoration(color: Colors.black38),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

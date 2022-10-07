@@ -26,10 +26,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               style: Theme.of(context).textTheme.headline1,
             ),
           )),
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: const IconThemeData(color: Colors.black),
       actions: [
         IconButton(
-          icon: Icon(Icons.favorite),
+          icon: const Icon(Icons.favorite),
           onPressed: () {
             Navigator.pushNamed(context, '/wishlist');
           },
@@ -39,5 +39,5 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(50.0);
+  Size get preferredSize => const Size.fromHeight(50.0);
 }

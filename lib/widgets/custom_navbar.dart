@@ -17,15 +17,15 @@ class CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       color: Colors.black87,
-      child: Container(
+      child: SizedBox(
         height: 70,
         child: (screen == '/product')
             ? AddToCartNavBar(product: product!)
             : (screen == '/cart')
-                ? GoToCheckoutNavBar()
+                ?  const GoToCheckoutNavBar()
                 : (screen == '/checkout')
-                    ? OrderNowNavBar()
-                    : HomeNavBar(),
+                    ? const OrderNowNavBar()
+                    : const HomeNavBar(),
       ),
     );
   }
@@ -43,7 +43,7 @@ class HomeNavBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-            icon: Icon(
+            icon:const Icon(
               Icons.home,
               color: Colors.white,
             ),
@@ -52,13 +52,13 @@ class HomeNavBar extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.white),
+            icon: const Icon(Icons.shopping_cart, color: Colors.white),
             onPressed: () {
               Navigator.pushNamed(context, '/cart');
             },
           ),
           IconButton(
-            icon: Icon(Icons.person, color: Colors.white),
+            icon: const Icon(Icons.person, color: Colors.white),
             onPressed: () {
               Navigator.pushNamed(context, '/user');
             },
@@ -81,7 +81,7 @@ class AddToCartNavBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.share,
               color: Colors.white,
             ),
@@ -89,13 +89,13 @@ class AddToCartNavBar extends StatelessWidget {
         BlocBuilder<WishlistBloc, WishlistState>(
           builder: (context, state) {
             return IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.favorite,
                   color: Colors.white,
                 ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                   const SnackBar(
                       content: Text('Se agrego a tu lista de deseos'),
                     ),
                   );
@@ -111,7 +111,7 @@ class AddToCartNavBar extends StatelessWidget {
               style: ElevatedButton.styleFrom(primary: Colors.white),
               onPressed: () {
                 context.read<CartBloc>().add(AddProduct(product));
-                final snackBar = SnackBar(content: Text('Agregado al Carro'));
+                const snackBar =  SnackBar(content: Text('Agregado al Carro'));
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.pushNamed(context, '/cart');
               },
@@ -141,7 +141,7 @@ class GoToCheckoutNavBar extends StatelessWidget {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Colors.white,
-            shape: RoundedRectangleBorder(),
+            shape: const RoundedRectangleBorder(),
           ),
           onPressed: () {
             Navigator.pushNamed(context, '/checkout');
@@ -168,7 +168,7 @@ class OrderNowNavBar extends StatelessWidget {
         BlocBuilder<CheckoutBloc, CheckoutState>(
           builder: (context, state) {
             if (state is CheckoutLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -176,7 +176,7 @@ class OrderNowNavBar extends StatelessWidget {
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
-                  shape: RoundedRectangleBorder(),
+                  shape:const RoundedRectangleBorder(),
                 ),
                 onPressed: () {
                   context
@@ -191,7 +191,7 @@ class OrderNowNavBar extends StatelessWidget {
                 ),
               );
             } else {
-              return Text('Algo salio mal.');
+              return const Text('Algo salio mal.');
             }
           },
         )

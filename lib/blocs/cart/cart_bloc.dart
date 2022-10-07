@@ -1,8 +1,6 @@
-import 'package:ecommerce_app/models/cart_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../models/product_model.dart';
+import 'package:ecommerce_app/models/models.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -17,8 +15,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   void _onLoadCart(event, Emitter<CartState> emit) async {
     emit(CartLoading());
     try {
-      await Future<void>.delayed(Duration(seconds: 1));
-      emit(CartLoaded());
+      await Future<void>.delayed(const Duration(seconds: 1));
+      emit(const CartLoaded());
     } catch (_) {
       emit(CartError());
     }

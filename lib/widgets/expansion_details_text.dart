@@ -47,14 +47,16 @@ class ExpansionDetailsText extends StatelessWidget {
 
   ElevatedButton submitBotton(BuildContext context) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(primary: Colors.blue),
+        style: ElevatedButton.styleFrom(primary: Colors.black),
         onPressed: () {
-          context.read()<PaymentBloc>().add(SelectPaymentMethod(paymentMethod: PaymentMethod.credit_card));
+          context.read()<PaymentBloc>().add(const SelectPaymentMethod(paymentMethod: PaymentMethod.credit_card));
           Navigator.pushNamed(context, '/order-confirmation');
         },
         child: Text(
+          
           'Pagar',
           style: Theme.of(context).textTheme.headline3!,
+          
         ));
   }
 }

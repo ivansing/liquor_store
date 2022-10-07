@@ -11,7 +11,7 @@ class Checkout extends Equatable {
   final String? deliveryFee;
   final String? total;
 
-  Checkout(
+ const Checkout(
       {required this.fullName,
       required this.email,
       required this.address,

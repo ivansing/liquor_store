@@ -18,7 +18,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     Emitter<PaymentState> emit,
   ) {
     emit(
-      PaymentLoaded(),
+      const PaymentLoaded(),
     );
   }
 

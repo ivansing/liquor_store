@@ -1,4 +1,4 @@
- import 'package:ecommerce_app/models/models.dart';
+import 'package:ecommerce_app/models/models.dart';
 import 'package:flutter/material.dart';
 
 import '../models/test_product_model.dart';
@@ -8,10 +8,8 @@ class OrderSummaryProductCart extends StatelessWidget {
     Key? key,
     required this.product,
     required this.quantity,
-    
   }) : super(key: key);
 
-  
   final TestProductModel product;
   final int quantity;
 
@@ -22,13 +20,12 @@ class OrderSummaryProductCart extends StatelessWidget {
       child: Row(
         children: [
           Image.network(
-            // Testing Images Purposes
             product.imageUrl,
             fit: BoxFit.cover,
             height: 80,
             width: 100,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             flex: 2,
             child: Column(
@@ -55,4 +52,4 @@ class OrderSummaryProductCart extends StatelessWidget {
       ),
     );
   }
-} 
+}

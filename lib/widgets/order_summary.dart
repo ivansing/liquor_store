@@ -73,7 +73,7 @@ class OrderSummary extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.all(5.0),
                     height: 50,
-                    decoration: BoxDecoration(color: Colors.black),
+                    decoration:const BoxDecoration(color: Colors.black),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Row(

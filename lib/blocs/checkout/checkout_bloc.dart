@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/checkout/checkout_repository.dart';
@@ -28,9 +27,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     required PaymentBloc paymentBloc,
     required CheckoutRepository checkoutRepository,
 
-        // Inputs
+    // Inputs
   })  : _cartBloc = cartBloc,
-       _paymentBloc = paymentBloc,
+        _paymentBloc = paymentBloc,
         _checkoutRepository = checkoutRepository,
         super(
           cartBloc.state is CartLoaded
@@ -48,10 +47,11 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
     _cartSubscription = _cartBloc.stream.listen(
       (state) {
-        if (state is CartLoaded)
+        if (state is CartLoaded) {
           add(
             UpdateCheckout(cart: state.cart),
           );
+        }
       },
     );
 
@@ -62,7 +62,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           UpdateCheckout(paymentMethod: state.paymentMethod),
         );
       }
-     });
+    });
   }
 
   void _onUpdateCheckout(
@@ -95,7 +95,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     if (state is CheckoutLoaded) {
       try {
         await _checkoutRepository.addCheckout(event.checkout);
-        print('Hecho');
         emit(CheckoutLoading());
       } catch (_) {}
     }

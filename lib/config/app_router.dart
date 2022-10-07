@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/models/category_model.dart';
 
-
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,7 @@ class AppRouter {
         return SplashScreen.route();
 
       case SignupScreen.routeName:
-        return SignupScreen.route();  
+        return SignupScreen.route();
 
       case LoginScreen.routeName:
         return LoginScreen.route();
@@ -54,9 +53,9 @@ class AppRouter {
 
   static Route _errorRoute() {
     return MaterialPageRoute(
-        settings: RouteSettings(name: '/error'),
+        settings: const RouteSettings(name: '/error'),
         builder: (_) => Scaffold(
-              appBar: AppBar(title: Text('Error')),
+              appBar: AppBar(title: const Text('Error')),
             ));
   }
 }

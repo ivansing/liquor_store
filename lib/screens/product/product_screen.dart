@@ -12,7 +12,7 @@ class ProductScreen extends StatelessWidget {
 
   static Route route({required Product product}) {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings:const RouteSettings(name: routeName),
       builder: (context) => ProductScreen(product: product),
     );
   }
@@ -28,12 +28,13 @@ class ProductScreen extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Container(
+          
           height: 70,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                  icon: Icon(
+                  icon:const Icon(
                     Icons.share,
                     color: Colors.white,
                   ),
@@ -41,7 +42,7 @@ class ProductScreen extends StatelessWidget {
               BlocBuilder<WishlistBloc, WishlistState>(
                 builder: (context, state) {
                   return IconButton(
-                      icon: Icon(
+                      icon:const Icon(
                         Icons.favorite,
                         color: Colors.white,
                       ),
@@ -50,8 +51,8 @@ class ProductScreen extends StatelessWidget {
                             .read<WishlistBloc>()
                             .add(AddtWishlistProduct(product));
 
-                        final snackBar = SnackBar(
-                            content: Text('Se agrego a tu lista de deseos'));
+                        const snackBar =  SnackBar(
+                            content:  Text('Se agrego a tu lista de deseos'));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       });
                 },
@@ -62,7 +63,7 @@ class ProductScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(primary: Colors.white),
                     onPressed: () {
                       context.read<CartBloc>().add(AddProduct(product));
-                      final snackBar =
+                      const snackBar =
                           SnackBar(content: Text('Agregado al Carro'));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       Navigator.pushNamed(context, '/cart');

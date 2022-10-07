@@ -31,28 +31,5 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(ProductLoaded(products: event.products));
   }
 }
-  /* @override
-  Stream<ProductState> mapEventToState(
-    ProductEvent event,
-  ) async* {
-    if (event is LoadProducts) {
-      yield* _mapLoadProductsToState();
-    }
-    if (event is UpdateProducts) {
-      yield* _mapUpdateProductsToState(event);
-    }
-  } 
-
-  Stream<ProductState> _mapLoadProductsToState() async* {
-    _productSubscription?.cancel();
-    _productSubscription = _productRepository.getAllProducts().listen(
-          (products) => add(
-            UpdateProducts(products),
-          ),
-        );
-  }
-
-  Stream<ProductState> _mapUpdateProductsToState(UpdateProducts event) async* {
-    yield ProductLoaded(products: event.products);
-  } */
+  
 

@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
             title: 'Licoreria App',
             theme: theme(),
             onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: SignupScreen.routeName,
+            initialRoute: SplashScreen.routeName,
           ),
         ),
       ),

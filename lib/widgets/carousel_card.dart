@@ -16,14 +16,14 @@ class CarouselCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (this.product == null) {
+        if (product == null) {
           Navigator.pushNamed(context, '/category', arguments: category);
         }
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 20),
+        margin:const EdgeInsets.symmetric(horizontal: 5.0, vertical: 20),
         child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderRadius:const BorderRadius.all(Radius.circular(10.0)),
             child: Stack(
               children: <Widget>[
                 Image.network(
@@ -35,7 +35,7 @@ class CarouselCard extends StatelessWidget {
                   left: 0.0,
                   right: 0.0,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
                           Color.fromARGB(200, 0, 0, 0),
@@ -45,7 +45,7 @@ class CarouselCard extends StatelessWidget {
                         end: Alignment.topCenter,
                       ),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding:const EdgeInsets.symmetric(
                       vertical: 10.0,
                       horizontal: 20.0,
                     ),
