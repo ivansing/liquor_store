@@ -1,19 +1,10 @@
-import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
-import 'package:ecommerce_app/models/models.dart';
-import 'package:ecommerce_app/repositories/checkout/checkout_repository.dart';
-import 'package:ecommerce_app/repositories/local_storage/local_storage_repository.dart';
 import 'package:ecommerce_app/repositories/repositories.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/simple_bloc_observer.dart';
-
 import 'package:hive_flutter/adapters.dart';
-
 import 'blocs/blocs.dart';
 import 'package:ecommerce_app/config/app_router.dart';
 import 'package:ecommerce_app/config/theme.dart';
-import 'package:ecommerce_app/repositories/category/category_repository.dart';
-import 'package:ecommerce_app/repositories/product/product_repository.dart';
-import 'package:ecommerce_app/screens/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +32,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     // Check user auth
     return MaterialApp(
       title: 'Licoreria',
@@ -60,7 +50,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => AuthBloc(
-                  authRepository: context.read<AuthRepository>(),
+                  authenticationRepository: context.read<AuthRepository>(),
                   userRepository: context.read<UserRepository>()),
             ),
             BlocProvider(
@@ -104,7 +94,7 @@ class MyApp extends StatelessWidget {
             title: 'Licoreria App',
             theme: theme(),
             onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: SplashScreen.routeName,
+            initialRoute: SignupScreen.routeName,
           ),
         ),
       ),

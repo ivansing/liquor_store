@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/models/models.dart';
+
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class AuthRepository {
@@ -7,8 +9,17 @@ class AuthRepository {
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
   // User changes emit current user
-  @override
-  Stream<auth.User?> get user => _firebaseAuth.userChanges();
+  
+  Stream<User> get user {
+    return _firebaseAuth.authStateChanges().map((firebaseUser) {
+      return firebaseUser == null ? User.empty : firebaseUser.toUser;
+    });
+  }
+
+  // Return current user [User.empty] 
+  User get currentUser {
+    return User.empty;
+  }
 
   // Create new User with email and password
   @override
@@ -40,7 +51,14 @@ class AuthRepository {
 
 // Sign out the current user
   @override
-  Future<void> signOut() async {
+  Future<void> logOut() async {
     await _firebaseAuth.signOut();
+  }
+}
+
+// Return a list of Auth Users
+extension on auth.User {
+  User get toUser {
+    return User(id: uid, email: email, fullName: displayName);
   }
 }

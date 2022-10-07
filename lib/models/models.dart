@@ -4,3 +4,6 @@ export 'cart_model.dart';
 export 'wishlist_model.dart';
 export 'checkout_model.dart';
 export 'user_model.dart';
+export 'email_model.dart';
+export 'password_model.dart';
+export 'confirmed_password_model.dart';

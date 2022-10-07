@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/category_model.dart';
 
+
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +14,17 @@ class AppRouter {
       case '/':
         return HomeScreen.route();
 
-      case HomeScreen.routeName:
-        return HomeScreen.route();
+      /* case HomeScreen.routeName:
+        return HomeScreen.route(); */
 
       case SplashScreen.routeName:
         return SplashScreen.route();
+
+      case SignupScreen.routeName:
+        return SignupScreen.route();  
+
+      case LoginScreen.routeName:
+        return LoginScreen.route();
 
       case CartScreen.routeName:
         return CartScreen.route();

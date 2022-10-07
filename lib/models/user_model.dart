@@ -1,46 +1,55 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
-  final String? id;
-  final String fullName;
-  final String email;
-  final String address;
-  final String city;
+/// [User.empty] represents an unauthenticated user.
 
-  User({
+class User extends Equatable {
+  const User({
     required this.id,
-    this.fullName = '',
-    this.email = '',
-    this.address = '',
-    this.city = '',
+    this.email,
+    this.fullName,
+    this.address,
+    this.city,
   });
 
-  // Edit User object
+  // Current's user data
+  final String? email;
+  final String id;
+  final String? fullName;
+  final String? address;
+  final String? city;
 
-  // ignore: empty_constructor_bodies
+  static const empty = User(id: '');
+
+  // Convenience getter to determine whether the current user is empty.
+  bool get isEmpty => this == User.empty;
+
+  // Convenience getter to determine whether the current user is not empty.
+  bool get isNotEmpty => this != User.empty;
+
   factory User.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    print(data);
+
     //  If data is null, check the data type
     return User(
       id: data.containsKey('id') ? data['id'] : '',
-      fullName: data.containsKey('fullName') ? data['fullName'] : '',
+      fullName: data.containsKey('name') ? data['name'] : '',
       email: data.containsKey('email') ? data['email'] : '',
-      address: data.containsKey('address') ? data['address'] : '',
-      city: data.containsKey('city') ? data['city'] : '',
+      address: data.containsKey('category') ? data['category'] : '',
+      city: data.containsKey('imageUrl') ? data['imageUrl'] : '',
     );
   }
 
-  Map<String, Object> toDocument() {
+   Map<String, Object> toDocument() {
     return {
-      'fullName': fullName,
+      'fullName' : fullName,
       'email': email,
       'address': address,
       'city': city,
-    };
+      
+    }; 
   }
 
   @override
-  List<Object?> get props => [id, fullName, email, address, city];
+  List<Object?> get props => [email, id, fullName, address, city];
 }

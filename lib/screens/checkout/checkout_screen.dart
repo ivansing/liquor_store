@@ -78,41 +78,7 @@ class CheckoutScreen extends StatelessWidget {
                         context: context,
                         title: 'Ciudad'),
                     SizedBox(height: 20),
-                    /* Container(
-                      height: 60,
-                      alignment: Alignment.bottomCenter,
-                      decoration: BoxDecoration(color: Colors.black),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Center(
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/payment-selection');
-                                },
-                                child: Text(
-                                  'SELECIONAR UN METODO DE PAGO',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline3!
-                                      .copyWith(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ), */
+                   
                     SizedBox(height: 30),
                     Text(
                       'RESUMEN PEDIDO',
