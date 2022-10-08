@@ -19,8 +19,8 @@ class AppRouter {
       case SplashScreen.routeName:
         return SplashScreen.route();
 
-      case SignupScreen.routeName:
-        return SignupScreen.route();
+      case SignUpScreen.routeName:
+        return SignUpScreen.route();
 
       case LoginScreen.routeName:
         return LoginScreen.route();

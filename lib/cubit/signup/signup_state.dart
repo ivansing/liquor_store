@@ -11,11 +11,13 @@ class SignUpState extends Equatable {
     this.errorMessage,
   });
 
-  final Email? email;
-  final Password? password;
-  final ConfirmedPassword? confirmedPassword;
-  final FormzStatus? status;
+  final Email email;
+  final Password password;
+  final ConfirmedPassword confirmedPassword;
+  final FormzStatus status;
   final String? errorMessage;
+
+  
 
   @override
   List<Object?> get props => [email, password, confirmedPassword, status];
@@ -38,3 +40,5 @@ class SignUpState extends Equatable {
 
   
 }
+
+

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/repositories.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/simple_bloc_observer.dart';
@@ -11,33 +12,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp();
 
   // TODO fix hive [Error: No implementation found for method
   //getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider]
-  /* await Hive.initFlutter();
-  Hive..registerAdapter(ProductAdapter()); */
+   await Hive.initFlutter();
+  Hive..registerAdapter(ProductAdapter()); 
 
-  BlocOverrides.runZoned(
-    () {
-      runApp(const MyApp());
-    },
-    blocObserver: SimpleBlocObserver(),
-  );
+  /* final authRepository = AuthRepository();
+  final userRepository = UserRepository();
+  await authRepository.user.first; */
+
+  runApp(MyApp( 
+    /* authRepository: authRepository,
+    userRepository: userRepository, */
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+    /* required AuthRepository authRepository,
+    required UserRepository userRepository, */
+    /* _authRepository = authRepository,
+        _userRepository = userRepository; */
+
+ /*  final AuthRepository _authRepository;
+  final UserRepository _userRepository; */
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Check user auth
     return MaterialApp(
       title: 'Licoreria',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: MultiRepositoryProvider(
+      home: /* MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
             create: (context) => AuthRepository(),
@@ -45,8 +55,8 @@ class MyApp extends StatelessWidget {
           RepositoryProvider(
             create: (context) => UserRepository(),
           ),
-        ],
-        child: MultiBlocProvider(
+        ], */
+         MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (context) => AuthBloc(
@@ -73,7 +83,9 @@ class MyApp extends StatelessWidget {
               ),
             ),
             BlocProvider(
-              create: (_) => WishlistBloc()
+              create: (_) => WishlistBloc(
+                localStorageRepository: LocalStorageRepository(),
+              )
                 ..add(
                   LoadWishList(),
                 ),
@@ -97,7 +109,7 @@ class MyApp extends StatelessWidget {
             initialRoute: SplashScreen.routeName,
           ),
         ),
-      ),
+      
     );
   }
 }

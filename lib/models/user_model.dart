@@ -40,14 +40,13 @@ class User extends Equatable {
     );
   }
 
-   Map<String, dynamic> toDocument() {
+  Map<String, dynamic> toDocument() {
     return {
-       'fullName' : fullName,
+      'fullName': fullName,
       'email': email,
       'address': address,
-      'city': city, 
-      
-    }; 
+      'city': city,
+    };
   }
 
   @override

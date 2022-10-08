@@ -22,7 +22,7 @@ class CustomNavBar extends StatelessWidget {
         child: (screen == '/product')
             ? AddToCartNavBar(product: product!)
             : (screen == '/cart')
-                ?  const GoToCheckoutNavBar()
+                ? const GoToCheckoutNavBar()
                 : (screen == '/checkout')
                     ? const OrderNowNavBar()
                     : const HomeNavBar(),
@@ -43,7 +43,7 @@ class HomeNavBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-            icon:const Icon(
+            icon: const Icon(
               Icons.home,
               color: Colors.white,
             ),
@@ -81,28 +81,32 @@ class AddToCartNavBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         IconButton(
-            icon: const Icon(
-              Icons.share,
-              color: Colors.white,
-            ),
+            icon: const Icon(Icons.share, color: Colors.white),
             onPressed: () {}),
         BlocBuilder<WishlistBloc, WishlistState>(
           builder: (context, state) {
-            return IconButton(
+            if (state is WishlistLoading) {
+              return const CircularProgressIndicator();
+            }
+            if (state is WishlistLoaded) {
+              return IconButton(
                 icon: const Icon(
                   Icons.favorite,
                   color: Colors.white,
                 ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                   const SnackBar(
+                    const SnackBar(
                       content: Text('Se agrego a tu lista de deseos'),
                     ),
                   );
                   context
                       .read<WishlistBloc>()
                       .add(AddtWishlistProduct(product));
-                });
+                },
+              );
+            }
+            return const Text('Algo salio pueder ser?');
           },
         ),
         BlocBuilder<CartBloc, CartState>(
@@ -111,7 +115,7 @@ class AddToCartNavBar extends StatelessWidget {
               style: ElevatedButton.styleFrom(primary: Colors.white),
               onPressed: () {
                 context.read<CartBloc>().add(AddProduct(product));
-                const snackBar =  SnackBar(content: Text('Agregado al Carro'));
+                const snackBar = SnackBar(content: Text('Agregado al Carro'));
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.pushNamed(context, '/cart');
               },
@@ -176,7 +180,7 @@ class OrderNowNavBar extends StatelessWidget {
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
-                  shape:const RoundedRectangleBorder(),
+                  shape: const RoundedRectangleBorder(),
                 ),
                 onPressed: () {
                   context

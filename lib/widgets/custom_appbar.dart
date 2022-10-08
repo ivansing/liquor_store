@@ -13,7 +13,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       backgroundColor: Colors.transparent,
       elevation: 0,
       automaticallyImplyLeading: automaticallyImplyLeading,
@@ -31,7 +30,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.favorite),
           onPressed: () {
-            Navigator.pushNamed(context, '/wishlist');
+            Navigator.pushNamed(
+              context,
+              '/wishlist',
+            );
           },
         )
       ],

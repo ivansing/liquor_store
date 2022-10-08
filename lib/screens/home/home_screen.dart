@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   ProductRepository productRepository = ProductRepository();
   final Stream<QuerySnapshot> productFirebase =
       FirebaseFirestore.instance.collection('products').snapshots();
+     
 
   static Route route() {
     return MaterialPageRoute(

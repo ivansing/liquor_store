@@ -11,40 +11,45 @@ class WishlistScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
         settings: const RouteSettings(name: routeName),
-        builder: (_) => const WishlistScreen());
+        builder: (context) => const WishlistScreen());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Lista Deseos'),
-      bottomNavigationBar:const CustomNavBar(screen: routeName),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: BlocBuilder<WishlistBloc, WishlistState>(
         builder: (context, state) {
           if (state is WishlistLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
             );
           }
           if (state is WishlistLoaded) {
-            return GridView.builder(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 16.0,
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: GridView.builder(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  childAspectRatio: 2.4,
+                ),
+                itemCount: state.wishlist.products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Center(
+                    child: ProductCard.wishlist(
+                      product: state.wishlist.products[index],
+                    ),
+                  );
+                },
               ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1, childAspectRatio: 2.4),
-              itemCount: state.wishlist.products.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Center(
-                  child: ProductCard.wishlist(
-                    product: state.wishlist.products[index],
-                  ),
-                );
-              },
             );
           } else {
-            return const Text('Algo salio mal');
+            return const Text('Algo salio mal uhh!');
           }
         },
       ),

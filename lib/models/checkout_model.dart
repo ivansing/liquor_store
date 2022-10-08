@@ -26,9 +26,12 @@ class Checkout extends Equatable {
       [fullName, email, address, city, products, subtotal, deliveryFee, total];
 
   Map<String, Object> toDocument() {
-    Map customerAddress = Map();
+    Map customerAddress = {};
     customerAddress['address'] = address;
     customerAddress['city'] = city;
+    customerAddress['email'] = email;
+   
+
 
     return {
       'customerAddress': customerAddress,

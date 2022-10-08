@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 class LocalStorageRepository extends BaseLocalStorageRepository {
 
   String boxName = 'wishlist_products';
+  Type boxType = Product;
 
   @override
   Future<Box> openBox() async {

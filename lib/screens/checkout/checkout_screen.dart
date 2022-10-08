@@ -16,7 +16,7 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Checkout'),
+      appBar: const CustomAppBar(title: 'Checkout'),
       bottomNavigationBar: CustomNavBar(screen: routeName),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -24,7 +24,7 @@ class CheckoutScreen extends StatelessWidget {
           child: BlocBuilder<CheckoutBloc, CheckoutState>(
             builder: (context, state) {
               if (state is CheckoutLoading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -37,7 +37,7 @@ class CheckoutScreen extends StatelessWidget {
                       'INFORMACIÓN USUARIO',
                       style: Theme.of(context).textTheme.headline3,
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     CustomTextFormField(
                         onChanged: (value) {
                           context.read<CheckoutBloc>().add(
@@ -46,7 +46,6 @@ class CheckoutScreen extends StatelessWidget {
                         },
                         context: context,
                         title: 'Email'),
-                        
                     CustomTextFormField(
                         onChanged: (value) {
                           context.read<CheckoutBloc>().add(
@@ -55,12 +54,12 @@ class CheckoutScreen extends StatelessWidget {
                         },
                         context: context,
                         title: 'Nombre Completo'),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'INFORMACIÓN ENVIO',
                       style: Theme.of(context).textTheme.headline3,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CustomTextFormField(
                         onChanged: (value) {
                           context.read<CheckoutBloc>().add(
@@ -77,18 +76,17 @@ class CheckoutScreen extends StatelessWidget {
                         },
                         context: context,
                         title: 'Ciudad'),
-                    SizedBox(height: 20),
-                   
-                    SizedBox(height: 30),
+                    const SizedBox(height: 20),
+                    const SizedBox(height: 30),
                     Text(
                       'RESUMEN PEDIDO',
                       style: Theme.of(context).textTheme.headline3,
                     ),
-                    OrderSummary(),
+                    const OrderSummary(),
                   ],
                 );
               } else {
-                return Text('Algo salio mal.');
+                return const Text('Algo salio mal.');
               }
             },
           ),

@@ -7,7 +7,7 @@ class SplashScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings:const RouteSettings(name: routeName),
       builder: (_) => SplashScreen(),
     );
   }
@@ -16,12 +16,12 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 2), () => Navigator.pushNamed(context, '/'));
+     Timer(const Duration(seconds: 2), () => Navigator.pushNamed(context, '/'));
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(
+       const Center(
           child: Image(
             image: AssetImage('assets/images/logo.png'),
             width: 200,
@@ -30,7 +30,7 @@ class SplashScreen extends StatelessWidget {
         ),
         Container(
           color: Colors.black,
-          padding: EdgeInsets.symmetric(
+          padding:const EdgeInsets.symmetric(
             horizontal: 10.0,
             vertical: 10,
           ),
