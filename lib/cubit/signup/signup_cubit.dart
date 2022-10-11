@@ -9,6 +9,7 @@ part 'signup_state.dart';
 class SignUpCubit extends Cubit<SignUpState> {
 
   final AuthRepository _authRepository;
+  
   SignUpCubit({required AuthRepository authRepository}) 
   : _authRepository = authRepository, 
   super(const SignUpState());
@@ -63,27 +64,27 @@ class SignUpCubit extends Cubit<SignUpState> {
         ]),
       ),
     );
+  }
 
     
     Future<void> signUpFormSubmitted() async {
-      if (!state.status.isValidated) return;
-      emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      try {
-        await _authRepository.signUp(
-          email: state.email.value,
-          password: state.password.value,
-        );
-        emit(state.copyWith(status: FormzStatus.submissionSuccess));
-      } on SignUpWithEmailAndPasswordFailure catch (e) {
-        emit(
-          state.copyWith(
-            errorMessage: e.message,
-            status: FormzStatus.submissionFailure,
-          ),
-        );
-      } catch (_) {
-        emit(state.copyWith(status: FormzStatus.submissionFailure));
-      }
+    if (!state.status.isValidated) return;
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    try {
+      await _authRepository.signUp(
+        email: state.email.value,
+        password: state.password.value,
+      );
+      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+    } on SignUpWithEmailAndPasswordFailure catch (e) {
+      emit(
+        state.copyWith(
+          errorMessage: e.message,
+          status: FormzStatus.submissionFailure,
+        ),
+      );
+    } catch (_) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
     }
   }
 }

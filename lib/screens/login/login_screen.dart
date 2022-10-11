@@ -1,7 +1,7 @@
+import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/cubit/login/login_cubit.dart';
-import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/auth/auth_repository.dart';
-import 'package:ecommerce_app/screens/register/signup_screen.dart';
+import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const LoginScreen(),
+      builder: (_) => const LoginScreen(),
     );
   }
 

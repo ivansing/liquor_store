@@ -9,42 +9,36 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authenticationRepository;
+  final AuthRepository _authRepository;
   late final StreamSubscription<User> _userSubscription;
-  final UserRepository _userRepository;
-  
-  
-  
+ // final UserRepository _userRepository;
 
-  AuthBloc({required AuthRepository authenticationRepository,   required UserRepository userRepository,  
-    })
-      : _authenticationRepository = authenticationRepository,
-        _userRepository = userRepository,
+  AuthBloc({
+    required AuthRepository authRepository,
+  //  required UserRepository userRepository,
+  })  : _authRepository = authRepository,
+      //  _userRepository = userRepository,
         super(
-          authenticationRepository.currentUser.isNotEmpty
-              ? AuthState.authenticated(authenticationRepository.currentUser)
+          authRepository.currentUser.isNotEmpty
+              ? AuthState.authenticated(authRepository.currentUser)
               : const AuthState.unauthenticated(),
         ) {
     on<AuthUserChanged>(_onUserChanged);
     on<AuthLogoutRequested>(_onLogoutRequested);
 
-    
-     _userSubscription = _authenticationRepository.user.listen(
+    _userSubscription = _authRepository.user.listen(
       (user) => add(AuthUserChanged(user)),
-    ); 
-  }
-
-  
-
-  void _onUserChanged(AuthUserChanged event, Emitter<AuthState> emit) {
-    emit(
-      event.user.isNotEmpty ? AuthState.authenticated(event.user)
-      : const AuthState.unauthenticated()
     );
   }
 
+  void _onUserChanged(AuthUserChanged event, Emitter<AuthState> emit) {
+    emit(event.user.isNotEmpty
+        ? AuthState.authenticated(event.user)
+        : const AuthState.unauthenticated());
+  }
+
   void _onLogoutRequested(AuthLogoutRequested event, Emitter<AuthState> emit) {
-    unawaited(_authenticationRepository.logOut());
+    unawaited(_authRepository.logOut());
   }
 
   @override
@@ -52,5 +46,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _userSubscription.cancel();
     return super.close();
   }
-
-} 
+}

@@ -1,7 +1,9 @@
+import 'package:ecommerce_app/config/auth_route.dart';
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/repositories.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/simple_bloc_observer.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'blocs/blocs.dart';
 import 'package:ecommerce_app/config/app_router.dart';
@@ -17,27 +19,27 @@ Future<void> main() async {
 
   // TODO fix hive [Error: No implementation found for method
   //getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider]
-   await Hive.initFlutter();
-  Hive..registerAdapter(ProductAdapter()); 
+  await Hive.initFlutter();
+  Hive..registerAdapter(ProductAdapter());
 
   /* final authRepository = AuthRepository();
   final userRepository = UserRepository();
   await authRepository.user.first; */
 
-  runApp(MyApp( 
-    /* authRepository: authRepository,
+  runApp(MyApp(
+      /* authRepository: authRepository,
     userRepository: userRepository, */
-  ));
+      ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-    /* required AuthRepository authRepository,
+  /* required AuthRepository authRepository,
     required UserRepository userRepository, */
-    /* _authRepository = authRepository,
+  /* _authRepository = authRepository,
         _userRepository = userRepository; */
 
- /*  final AuthRepository _authRepository;
+  /*  final AuthRepository _authRepository;
   final UserRepository _userRepository; */
 
   // This widget is the root of your application.
@@ -47,22 +49,21 @@ class MyApp extends StatelessWidget {
       title: 'Licoreria',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: /* MultiRepositoryProvider(
+      home: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
-            create: (context) => AuthRepository(),
+            create: (context) => AuthRepository(), //AuthBloc(authRepository: context.read<AuthRepository>()),
           ),
-          RepositoryProvider(
+          /* RepositoryProvider(
             create: (context) => UserRepository(),
-          ),
-        ], */
-         MultiBlocProvider(
+          ), */
+        ],
+        child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => AuthBloc(
-                  authenticationRepository: context.read<AuthRepository>(),
-                  userRepository: context.read<UserRepository>()),
-            ),
+                create: (context) => AuthBloc(
+                      authRepository: context.read<AuthRepository>(),
+                    )),
             BlocProvider(
               create: (_) => CartBloc()
                 ..add(
@@ -85,8 +86,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => WishlistBloc(
                 localStorageRepository: LocalStorageRepository(),
-              )
-                ..add(
+              )..add(
                   LoadWishList(),
                 ),
             ),
@@ -101,15 +101,30 @@ class MyApp extends StatelessWidget {
               )..add(LoadProducts()),
             )
           ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Licoreria App',
-            theme: theme(),
-            onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: SplashScreen.routeName,
-          ),
+          child: const MyAppView(),
         ),
-      
+      ),
+    );
+  }
+}
+
+class MyAppView extends StatelessWidget {
+  const MyAppView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Licoreria App',
+      theme: theme(),
+      /* home: FlowBuilder<AuthStatus>(
+        state: context.select((AuthBloc bloc) => bloc.state.status),
+        onGeneratePages: AppRouter.
+      ), */
+      onGenerateRoute: AppRouter.onGenerateRoute,
+      initialRoute: SplashScreen.routeName,
     );
   }
 }

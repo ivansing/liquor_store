@@ -1,10 +1,10 @@
 //import 'package:ecommerce_app/cubit/signup/signup_cubit.dart';
+import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
 import 'package:ecommerce_app/repositories/auth/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:ecommerce_app/cubit/cubit.dart';
-
 
 class SignUpScreen extends StatelessWidget {
   static const String routeName = '/register';
@@ -13,9 +13,8 @@ class SignUpScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) => const SignUpScreen(),
-    );
+        settings: const RouteSettings(name: routeName),
+        builder: (_) => const SignUpScreen());
   }
 
   @override
@@ -24,7 +23,8 @@ class SignUpScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: BlocProvider<SignUpCubit>(
-          create: (_) => SignUpCubit(authRepository: context.read()),
+          create: (_) =>
+              SignUpCubit(authRepository: context.read<AuthRepository>()),
           child: const SignUpForm(),
         ),
       ),
@@ -87,7 +87,12 @@ class _EmailInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_emailInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
+          onChanged: (email) {
+            context.read<SignUpCubit>().emailChanged(email);
+
+            // Testins purposes print
+            print(state.email);
+          },
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: 'email',
@@ -108,8 +113,10 @@ class _PasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<SignUpCubit>().passwordChanged(password),
+          onChanged: (password) {
+            context.read<SignUpCubit>().passwordChanged(password);
+            print(state.password);
+          },
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'contraseña',
@@ -165,9 +172,9 @@ class _SignUpButton extends StatelessWidget {
                   ),
                 ),
                 onPressed: state.status.isValidated
-                    ? () => context.read<SignUpCubit>() //.signUpFormSubmitted() problem method 
+                    ? () => context.read<SignUpCubit>().signUpFormSubmitted()
                     : null,
-                child: const Text('SIGN UP'),
+                child: const Text('Registro'),
               );
       },
     );

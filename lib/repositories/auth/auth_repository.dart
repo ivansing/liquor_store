@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/models/models.dart';
+import 'package:ecommerce_app/repositories/auth/base_auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class AuthRepository {

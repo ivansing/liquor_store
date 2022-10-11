@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
 import 'package:ecommerce_app/blocs/category/category_bloc.dart';
 import 'package:ecommerce_app/blocs/product/product_bloc.dart';
 import 'package:ecommerce_app/repositories/product/product_repository.dart';
+import 'package:ecommerce_app/screens/login/login_screen.dart';
+import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,13 +15,20 @@ class HomeScreen extends StatelessWidget {
   ProductRepository productRepository = ProductRepository();
   final Stream<QuerySnapshot> productFirebase =
       FirebaseFirestore.instance.collection('products').snapshots();
-     
 
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => HomeScreen(),
-    );
+      builder:  (context) {
+        // testing dev
+          print(
+            'From home_screen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
+        return BlocProvider.of<AuthBloc>(context).state.status ==
+                AuthStatus.unauthenticated
+            ? const LoginScreen()
+            : HomeScreen();
+      }, 
+    ); 
   }
 
   @override
@@ -51,16 +61,16 @@ class HomeScreen extends StatelessWidget {
                           .toList(),
                     );
                   } else {
-                    return Text('Algo salio mal.');
+                    return const Text('Algo salio mal.');
                   }
                 },
               ),
             ),
-            SectionTitle(title: 'Recomendados'),
+            const SectionTitle(title: 'Recomendados'),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 if (state is ProductLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -72,15 +82,15 @@ class HomeScreen extends StatelessWidget {
                         .toList(),
                   );
                 } else {
-                  return Text('Algo salio mal.');
+                  return const Text('Algo salio mal.');
                 }
               },
             ),
-            SectionTitle(title: 'Mas Populares'),
+            const SectionTitle(title: 'Mas Populares'),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 if (state is ProductLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -90,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                           .where((product) => product.isPopular)
                           .toList());
                 } else {
-                  return Text('Algo salio mal.');
+                  return const Text('Algo salio mal.');
                 }
               },
             ),

@@ -29,6 +29,9 @@ class SignUpState extends Equatable {
     FormzStatus? status,
     String? errorMessage,
   }) {
+    
+    // Returns data with a new modified fields status, keep the current one value
+    // if it has been not added before.
     return SignUpState(
       email: email ?? this.email,
       password: password ?? this.password,

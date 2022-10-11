@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/models/category_model.dart';
 
 import 'package:ecommerce_app/screens/screens.dart';
@@ -9,12 +10,11 @@ class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     print('Esta es la ruta: ${settings.name}');
 
-    switch (settings.name) {
+   
+
+    switch (settings.name ) {
       case '/':
         return HomeScreen.route();
-
-      /* case HomeScreen.routeName:
-        return HomeScreen.route(); */
 
       case SplashScreen.routeName:
         return SplashScreen.route();
