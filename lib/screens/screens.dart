@@ -9,3 +9,4 @@ export 'order_confirmation/order_confirmation_screen.dart';
 export 'payment_selection_screen/payment_selection_screen.dart';
 export 'login/login_screen.dart';
 export 'register/signup_screen.dart';
+export 'profile/profile_screen.dart';

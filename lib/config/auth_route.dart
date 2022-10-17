@@ -2,7 +2,7 @@ import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
 import 'package:ecommerce_app/screens/home/home_screen.dart';
 import 'package:ecommerce_app/screens/login/login_screen.dart';
 
-/* List<Page<dynamic>> onGenerateRouteView(
+ /* List<Page<dynamic>> onGenerateRouteView(
   AuthBloc state,
   List<Page<dynamic>> pages,
 ) {
@@ -13,4 +13,4 @@ import 'package:ecommerce_app/screens/login/login_screen.dart';
       return [LoginScreen.routeName]; 
   }
 
-} */
+}  */

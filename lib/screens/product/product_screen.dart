@@ -12,7 +12,7 @@ class ProductScreen extends StatelessWidget {
 
   static Route route({required Product product}) {
     return MaterialPageRoute(
-      settings:const RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => ProductScreen(product: product),
     );
   }
@@ -28,13 +28,12 @@ class ProductScreen extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Container(
-          
           height: 70,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                  icon:const Icon(
+                  icon: const Icon(
                     Icons.share,
                     color: Colors.white,
                   ),
@@ -42,7 +41,7 @@ class ProductScreen extends StatelessWidget {
               BlocBuilder<WishlistBloc, WishlistState>(
                 builder: (context, state) {
                   return IconButton(
-                      icon:const Icon(
+                      icon: const Icon(
                         Icons.favorite,
                         color: Colors.white,
                       ),
@@ -51,8 +50,8 @@ class ProductScreen extends StatelessWidget {
                             .read<WishlistBloc>()
                             .add(AddtWishlistProduct(product));
 
-                        const snackBar =  SnackBar(
-                            content:  Text('Se agrego a tu lista de deseos'));
+                        const snackBar = SnackBar(
+                            content: Text('Se agrego a tu lista de deseos'));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       });
                 },

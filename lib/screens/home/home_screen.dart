@@ -4,13 +4,14 @@ import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
 import 'package:ecommerce_app/blocs/category/category_bloc.dart';
 import 'package:ecommerce_app/blocs/product/product_bloc.dart';
 import 'package:ecommerce_app/repositories/product/product_repository.dart';
-import 'package:ecommerce_app/screens/login/login_screen.dart';
+
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
+  
   static const String routeName = '/';
   ProductRepository productRepository = ProductRepository();
   final Stream<QuerySnapshot> productFirebase =
@@ -18,17 +19,18 @@ class HomeScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder:  (context) {
+        settings: const RouteSettings(name: routeName),
+        builder: (_) =>
+            HomeScreen() /*  (context) {
         // testing dev
           print(
             'From home_screen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
         return BlocProvider.of<AuthBloc>(context).state.status ==
                 AuthStatus.unauthenticated
             ? const LoginScreen()
-            : HomeScreen();
-      }, 
-    ); 
+            : HomeScreen(); 
+      }   */
+        );
   }
 
   @override

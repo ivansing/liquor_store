@@ -9,7 +9,7 @@ class OrderConfirmation extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => OrderConfirmation(),
     );
   }
@@ -17,8 +17,8 @@ class OrderConfirmation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Confirma Orden'),
-      bottomNavigationBar: CustomNavBar(screen: routeName),
+      appBar: const CustomAppBar(title: 'Confirma Orden'),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
@@ -59,35 +59,35 @@ class OrderConfirmation extends StatelessWidget {
                     'CODIGO DE ORDEN: 345346',
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'Gracias por su compra en nuestra tienda.',
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'CODIGO DE ORDEN: 345346',
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  OrderSummary(),
-                  SizedBox(height: 20),
+                  const OrderSummary(),
+                  const SizedBox(height: 20),
                   Text(
                     'DETALLES DE LA ORDEN',
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  Divider(thickness: 2),
-                  SizedBox(height: 5),
+                  const Divider(thickness: 2),
+                  const SizedBox(height: 5),
                   ListView(
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      ProductCard.summary(product:
-                        Product.products[0],
+                      ProductCard.summary(
+                        product: Product.products[0],
                         quantity: 2,
                       ),
-                      ProductCard.summary(product:
-                        Product.products[2],
+                      ProductCard.summary(
+                        product: Product.products[2],
                         quantity: 2,
                       )
                     ],

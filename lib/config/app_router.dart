@@ -1,18 +1,13 @@
 import 'package:ecommerce_app/blocs/blocs.dart';
-import 'package:ecommerce_app/models/category_model.dart';
-
+import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
-
-import '../models/product_model.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     print('Esta es la ruta: ${settings.name}');
 
-   
-
-    switch (settings.name ) {
+    switch (settings.name) {
       case '/':
         return HomeScreen.route();
 
@@ -45,6 +40,9 @@ class AppRouter {
 
       case PaymentSelection.routeName:
         return PaymentSelection.route();
+
+      case ProfileScreen.routeName:
+        return ProfileScreen.route();
 
       default:
         return _errorRoute();

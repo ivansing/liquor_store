@@ -60,7 +60,7 @@ class HomeNavBar extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.person, color: Colors.white),
             onPressed: () {
-              Navigator.pushNamed(context, '/user');
+              Navigator.pushNamed(context, '/profile');
             },
           )
         ]);

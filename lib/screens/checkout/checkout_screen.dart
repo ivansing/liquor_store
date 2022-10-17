@@ -8,7 +8,7 @@ class CheckoutScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => CheckoutScreen(),
     );
   }
@@ -17,7 +17,7 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Checkout'),
-      bottomNavigationBar: CustomNavBar(screen: routeName),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(

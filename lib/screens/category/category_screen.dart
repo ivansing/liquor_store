@@ -9,7 +9,7 @@ class CategoryScreen extends StatelessWidget {
 
   static Route route({required Category category}) {
     return MaterialPageRoute(
-        settings: RouteSettings(name: routeName),
+        settings: const RouteSettings(name: routeName),
         builder: (_) => CategoryScreen(category: category));
   }
 
@@ -22,11 +22,11 @@ class CategoryScreen extends StatelessWidget {
     //
     return Scaffold(
       appBar: CustomAppBar(title: category.name),
-      bottomNavigationBar: CustomNavBar(screen: routeName),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state is ProductLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -54,7 +54,7 @@ class CategoryScreen extends StatelessWidget {
               },
             );
           } else {
-            return Text('Algo salio mal.');
+            return const Text('Algo salio mal.');
           }
         },
       ),
