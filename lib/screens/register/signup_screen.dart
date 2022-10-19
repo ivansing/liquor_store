@@ -1,6 +1,7 @@
 //import 'package:ecommerce_app/cubit/signup/signup_cubit.dart';
 import 'package:ecommerce_app/blocs/auth/auth_bloc.dart';
 import 'package:ecommerce_app/repositories/auth/auth_repository.dart';
+import 'package:ecommerce_app/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -173,7 +174,7 @@ class _SignUpButton extends StatelessWidget {
                 ),
                 onPressed: state.status.isValidated
                     ? () => context.read<SignUpCubit>().signUpFormSubmitted()
-                    : null,
+                    : ()  => Navigator.of(context).pushNamed(HomeScreen.routeName),
                 child: const Text('Registro'),
               );
       },

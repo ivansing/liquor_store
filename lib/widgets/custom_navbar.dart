@@ -32,13 +32,15 @@ class CustomNavBar extends StatelessWidget {
 }
 
 class HomeNavBar extends StatelessWidget {
+ 
   const HomeNavBar({
-    Key? key,
+    Key? key,  
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+        
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

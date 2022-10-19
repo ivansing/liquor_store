@@ -14,6 +14,7 @@ class ProductCard extends StatelessWidget {
     this.isCategory = true,
     this.isCart = false,
     this.isSummary = false,
+    this.isOrderDetails = false,
     this.iconColor = Colors.white,
     this.fontColor = Colors.white,
   }) : super(key: key);
@@ -28,6 +29,7 @@ class ProductCard extends StatelessWidget {
     this.isCategory = false,
     this.isCart = true,
     this.isSummary = false,
+    this.isOrderDetails = false,
     this.iconColor = Colors.black,
     this.fontColor = Colors.black,
   }) : super(key: key);
@@ -42,8 +44,24 @@ class ProductCard extends StatelessWidget {
     this.isCategory = false,
     this.isCart = false,
     this.isSummary = false,
+    this.isOrderDetails = false,
     this.iconColor = Colors.white,
     this.fontColor = Colors.white,
+  }) : super(key: key);
+
+  const ProductCard.orderDetails({
+    Key? key,
+    required this.product,
+    this.quantity,
+    this.widthFactor = 2.25,
+    this.height = 80,
+    this.isWishlist = false,
+    this.isCategory = false,
+    this.isCart = false,
+    this.isSummary = false,
+    this.isOrderDetails = true,
+    this.iconColor = Colors.black,
+    this.fontColor = Colors.black,
   }) : super(key: key);
 
   const ProductCard.summary({
@@ -56,6 +74,7 @@ class ProductCard extends StatelessWidget {
     this.isCategory = false,
     this.isCart = false,
     this.isSummary = true,
+    this.isOrderDetails = false,
     this.iconColor = Colors.black,
     this.fontColor = Colors.black,
   }) : super(key: key);
@@ -66,8 +85,9 @@ class ProductCard extends StatelessWidget {
   final double height;
   final bool isCategory;
   final bool isCart;
-  final isWishlist;
-  final isSummary;
+  final bool isWishlist;
+  final bool isSummary;
+  final bool isOrderDetails;
   final Color iconColor;
   final Color fontColor;
 
@@ -78,14 +98,15 @@ class ProductCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        if (isCategory || isWishlist)
-         Navigator.pushNamed(
+        if (isCategory || isWishlist) {
+          Navigator.pushNamed(
             context,
             '/product',
             arguments: product,
           );
+        }
       },
-      child: isCart || isSummary
+      child: isCart || isSummary 
           ? Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Row(
@@ -104,6 +125,7 @@ class ProductCard extends StatelessWidget {
                         fontColor: fontColor,
                         quantity: quantity,
                         isOrderSummary: isSummary ? true : false,
+                        
                       ),
                     ),
                   ),
@@ -138,6 +160,7 @@ class ProductCard extends StatelessWidget {
                           quantity: quantity,
                           fontColor: fontColor,
                           isOrderSummary: isSummary ? true : false,
+                          
                         ),
                       ),
                     ),
@@ -206,7 +229,7 @@ class ProductActions extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-              const  SnackBar(
+                const SnackBar(
                   content: Text('Agregado a tu carro!'),
                 ),
               );
@@ -221,7 +244,7 @@ class ProductActions extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-              const  SnackBar(
+                const SnackBar(
                   content: Text('Borrado del carro!'),
                 ),
               );
@@ -236,8 +259,8 @@ class ProductActions extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content:  Text('Borrado de la lista de deseos!'),
+                const SnackBar(
+                  content: Text('Borrado de la lista de deseos!'),
                 ),
               );
               context.read<WishlistBloc>().add(RemovetWishlistProduct(product));
@@ -370,7 +393,7 @@ class ProductBackground extends StatelessWidget {
         height: 70,
         margin: const EdgeInsets.only(bottom: 5),
         alignment: Alignment.bottomCenter,
-        decoration:const BoxDecoration(color: Colors.black38),
+        decoration: const BoxDecoration(color: Colors.black38),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

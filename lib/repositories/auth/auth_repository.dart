@@ -9,20 +9,23 @@ class AuthRepository {
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
   // User changes emit current user
-  
+
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       return firebaseUser == null ? User.empty : firebaseUser.toUser;
     });
   }
 
-  // Return current user [User.empty] 
+  // Return current user [User.empty]
   User get currentUser {
     return User.empty;
   }
 
   // Create new User with email and password
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+  }) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -47,8 +50,7 @@ class AuthRepository {
       );
     } on auth.FirebaseAuthException catch (e) {
       throw LogInWithEmailAndPasswordFailure.fromCode(e.code);
-    } 
-    catch (_) {
+    } catch (_) {
       throw const LogInWithEmailAndPasswordFailure();
     }
   }

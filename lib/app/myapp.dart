@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             )..add(LoadProducts()),
           )
         ],
-        child: const MyAppView(),
+        child: const MyAppView2(),
       ),
     );
   }
@@ -79,12 +79,8 @@ class MyAppView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Licoreria App',
       theme: theme(),
-      /* home: FlowBuilder<AuthStatus>(
-        state: context.select((AuthBloc bloc) => bloc.state.status),
-        onGeneratePages: AppRouter.
-      ), */
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
     );
   }
 }
@@ -102,19 +98,13 @@ class _MyAppView2State extends State<MyAppView2> {
 
   @override
   Widget build(BuildContext context) {
-   return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Licoreria App',
       theme: theme(),
       navigatorKey: _navigatorKey,
-      
-      
-      /* home: FlowBuilder<AuthStatus>(
-        state: context.select((AuthBloc bloc) => bloc.state.status),
-        onGeneratePages: AppRouter.
-      ), */
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: ProfileScreen.routeName,
-   );
+      initialRoute:  SplashScreen.routeName,
+    );
   }
 }

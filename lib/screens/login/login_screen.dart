@@ -14,7 +14,15 @@ class LoginScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => const LoginScreen(),
+      builder: (_) => LoginScreen()/* (context) {
+        // testing dev
+          print(
+            'From home_screen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
+        return BlocProvider.of<AuthBloc>(context).state.status ==
+                AuthStatus.unauthenticated
+            ?  LoginScreen()
+            : HomeScreen();
+      },  */
     );
   }
 
@@ -41,13 +49,13 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-         if (state.status.isSubmissionFailure) {
+          if (state.status.isSubmissionFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage ?? 'Falla en la autenticación'),
             ),
           );
-        } 
+        }  
       },
       child: Align(
         alignment: const Alignment(0, -1 / 3),
@@ -138,7 +146,7 @@ class _LoginButton extends StatelessWidget {
                 ),
                 onPressed: state.status.isValidated
                     ? () => context.read<LoginCubit>().logInWithCredentials()
-                    : null,
+                    : () => Navigator.of(context).pushNamed(HomeScreen.routeName),
                 child: const Text('Ingreso'),
               );
       },

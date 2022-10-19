@@ -1,11 +1,8 @@
 import 'package:ecommerce_app/models/models.dart';
-import 'package:ecommerce_app/widgets/custom_appbar.dart';
-import 'package:ecommerce_app/widgets/custom_navbar.dart';
+
+import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get_navigation/src/routes/default_transitions.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   static const String routeName = '/profile';
@@ -20,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Perfil'),
+      appBar: const CustomAppBarProfile(title: 'Perfil'),
       bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

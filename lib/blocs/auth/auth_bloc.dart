@@ -11,13 +11,10 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
   late final StreamSubscription<User> _userSubscription;
- // final UserRepository _userRepository;
 
   AuthBloc({
     required AuthRepository authRepository,
-  //  required UserRepository userRepository,
   })  : _authRepository = authRepository,
-      //  _userRepository = userRepository,
         super(
           authRepository.currentUser.isNotEmpty
               ? AuthState.authenticated(authRepository.currentUser)

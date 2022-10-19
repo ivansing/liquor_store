@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  
   static const String routeName = '/';
   ProductRepository productRepository = ProductRepository();
   final Stream<QuerySnapshot> productFirebase =
@@ -20,8 +19,7 @@ class HomeScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
         settings: const RouteSettings(name: routeName),
-        builder: (_) =>
-            HomeScreen() /*  (context) {
+        builder: (_) =>  HomeScreen() /*  (context) {
         // testing dev
           print(
             'From home_screen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
@@ -36,7 +34,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'LICORERIA'),
+      appBar: const CustomAppBarHomeScreen(title: 'LICORERIA'),
       bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: SingleChildScrollView(
         child: Column(

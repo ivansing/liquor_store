@@ -16,7 +16,7 @@ Future<void> main() async {
   // TODO fix hive [Error: No implementation found for method
   //getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider]
   await Hive.initFlutter();
-  Hive..registerAdapter(ProductAdapter());
+  Hive.registerAdapter(ProductAdapter());
 
   final authRepository = AuthRepository();
   await authRepository.user.first;

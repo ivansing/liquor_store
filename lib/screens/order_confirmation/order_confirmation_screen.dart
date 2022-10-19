@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/models/test_product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 
@@ -77,13 +79,90 @@ class OrderConfirmation extends StatelessWidget {
                   ),
                   const Divider(thickness: 2),
                   const SizedBox(height: 5),
-                  ListView(
+                  BlocBuilder<CartBloc, CartState>(
+                    builder: (context, state) {
+                      if (state is CartLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (state is CartLoaded) {
+                        Map cart =
+                            state.cart.productQuantity(state.cart.products);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [],
+                                    ),
+                                    const SizedBox(height: 5),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              1.0,
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: cart.keys.length,
+                                        itemBuilder: (context, index) {
+                                          return ProductCard.orderDetails(
+                                            product: cart.keys.elementAt(index),
+                                            quantity:
+                                                cart.values.elementAt(index),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        return const Text('Algo salio mal');
+                      }
+                    },
+                  ),
+                  /* BlocBuilder<CartBloc, CartState>(
+                    builder: (context, state) {
+                      if (state is CartLoading) {
+                        return Center(child: CircularProgressIndicator(),);
+                      } 
+                      if (state is CartLoaded) {
+                        
+                      }
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        child: ListView.builder(
+                          itemCount: cart.keys.length,
+                          itemBuilder: (context, index) {
+                            return ProductCard.cart(
+                              product: cart.keys.elementAt(index),
+                              quantity: cart.values.elementAt(index),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ), */
+
+                  /* ListView(
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       ProductCard.summary(
-                        product: Product.products[0],
+                        product: Product.products[1],
                         quantity: 2,
                       ),
                       ProductCard.summary(
@@ -91,7 +170,7 @@ class OrderConfirmation extends StatelessWidget {
                         quantity: 2,
                       )
                     ],
-                  )
+                  )  */
                 ],
               ),
             )

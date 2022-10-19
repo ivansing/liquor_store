@@ -8,8 +8,14 @@ class AppRouter {
     print('Esta es la ruta: ${settings.name}');
 
     switch (settings.name) {
+
       case '/':
-        return HomeScreen.route();
+      return HomeScreen.route();
+     /*  case HomeScreen.routeName:
+        return HomeScreen.route(); */
+
+      case HomeScreen.routeName:
+      return HomeScreen.route();
 
       case SplashScreen.routeName:
         return SplashScreen.route();
