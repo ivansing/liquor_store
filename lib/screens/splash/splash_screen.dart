@@ -9,8 +9,9 @@ class SplashScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (_)  => SplashScreen()/* (context) {
+        settings: const RouteSettings(name: routeName),
+        builder: (_) =>
+            SplashScreen() /* (context) {
         // testing dev
           print(
             'From SplashScreen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
@@ -19,19 +20,18 @@ class SplashScreen extends StatelessWidget {
             ? const LoginScreen()
             : HomeScreen(); 
       }   */
-    );
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-      Timer(const Duration(seconds: 2), () => Navigator.pushNamed(context, '/'));
+    Timer(const Duration(seconds: 2), () => Navigator.pushNamed(context, '/'));
 
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            print("Listener");
-            /* if (state.status == AuthStatus.unauthenticated) {
+    return BlocListener<AuthBloc, AuthState>(
+      listenWhen: (previous, current) => previous.authUser != current.authUser,
+      listener: (context, state) {
+        print("Splash screen Auth Listener");
+        /* if (state.status == AuthStatus.unauthenticated) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                 LoginScreen.routeName,
                 ModalRoute.withName('/login'),
@@ -42,34 +42,35 @@ class SplashScreen extends StatelessWidget {
                 () => Navigator.of(context).pushNamed(HomeScreen.routeName),
               );
             } */
-          },
-          child: Scaffold(
-              body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Center(
-                child: Image(
-                  image: AssetImage('assets/images/logo.png'),
-                  width: 200,
-                  height: 200,
-                ),
+      },
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Center(
+              child: Image(
+                image: AssetImage('assets/images/logo.png'),
+                width: 200,
+                height: 200,
               ),
-              Container(
-                color: Colors.black,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                  vertical: 10,
-                ),
-                child: Text(
-                  'Los Mejores Licores',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(color: Colors.white),
-                ),
-              )
-            ],
-          )),
-        ));
+            ),
+            Container(
+              color: Colors.black,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 10,
+              ),
+              child: Text(
+                'Los Mejores Licores',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
+                    .copyWith(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

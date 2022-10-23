@@ -1,18 +1,50 @@
+
+
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_app/models/models.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:ecommerce_app/repositories/auth/auth_repository.dart';
 
 part 'signup_state.dart';
 
-class SignUpCubit extends Cubit<SignUpState> {
-
+class SignUpCubit extends Cubit<SignupState> {
   final AuthRepository _authRepository;
+
+  SignUpCubit({required AuthRepository authRepository})
+      : _authRepository = authRepository,
+        super(SignupState.initial());
+
+  void userChanged(User user) {
+    emit(state.copyWith(
+      user: user,
+      status: SignupStatus.initial,
+    ));
+  }
+
+  void passwordChanged(String value) {
+    emit(state.copyWith(password: value, status: SignupStatus.initial));
+  }
+  
+  Future<void> signUpWithCredentials() async {
+    if (!state.isFormValid || state.status == SignupStatus.submitting) return;
+    emit(state.copyWith(status: SignupStatus.submitting));
+    try {
+      var authUser = await _authRepository.signUp(
+        password: state.password,
+        user: state.user!,
+      );
+      emit(state.copyWith(status: SignupStatus.sucess, authUser: authUser ));
+    } catch (_) {}
+  }
+
+  /* final AuthRepository _authRepository;
   
   SignUpCubit({required AuthRepository authRepository}) 
   : _authRepository = authRepository, 
-  super(const SignUpState());
+  super( SignupState());
 
   
 
@@ -86,5 +118,5 @@ class SignUpCubit extends Cubit<SignUpState> {
     } catch (_) {
       emit(state.copyWith(status: FormzStatus.submissionFailure));
     }
-  }
+  } */
 }

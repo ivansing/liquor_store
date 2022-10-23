@@ -12,17 +12,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp();
-
-  // TODO fix hive [Error: No implementation found for method
-  //getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider]
   await Hive.initFlutter();
   Hive.registerAdapter(ProductAdapter());
 
-  final authRepository = AuthRepository();
-  await authRepository.user.first;
+  /* final authRepository = AuthRepository();
+  await authRepository.user.first; */
 
   runApp(MyApp(
-    authRepository: authRepository,
-  ));
+      /* authRepository: authRepository, */
+      ));
 }
-

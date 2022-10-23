@@ -173,21 +173,7 @@ class ProductCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                /* Positioned(
-            top: 60,
-            left: 5,
-            child: Container(
-              width: MediaQuery.of(context).size.width / 2.2 - 10,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.black38,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: 
-              ),
-            ),
-          ) */
+                
               ],
             ),
     );

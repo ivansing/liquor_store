@@ -36,7 +36,7 @@ class CustomAppBarProfile extends StatelessWidget with PreferredSizeWidget {
           IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
-              Navigator.of(context).pushNamed(LoginScreen.routeName);
+            //  Navigator.of(context).pushNamed(LoginScreen.routeName);
             },
           )
         ],

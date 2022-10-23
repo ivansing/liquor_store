@@ -25,7 +25,11 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: product.name),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: CustomNavBar(screen: routeName, product: product,),
+      
+      
+      
+     /*  BottomAppBar(
         color: Colors.black,
         child: Container(
           height: 70,
@@ -77,7 +81,7 @@ class ProductScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ), */
       body: ListView(
         children: [
           CarouselSlider(
@@ -110,24 +114,27 @@ class ProductScreen extends StatelessWidget {
                   color: Colors.black,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          product.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Colors.white),
-                        ),
-                        Text(
-                          '${product.price}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Colors.white),
-                        )
-                      ],
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            product.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(color: Colors.white),
+                          ),
+                          Text(
+                            '${product.price}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(color: Colors.white),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

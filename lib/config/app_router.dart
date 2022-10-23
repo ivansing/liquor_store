@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/models/models.dart';
+import 'package:ecommerce_app/screens/register/signup_screen.dart';
 import 'package:ecommerce_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -20,11 +21,11 @@ class AppRouter {
       case SplashScreen.routeName:
         return SplashScreen.route();
 
-      case SignUpScreen.routeName:
-        return SignUpScreen.route();
+       case SignUpScreen.routeName:
+        return SignUpScreen.route(); 
 
-      case LoginScreen.routeName:
-        return LoginScreen.route();
+       case LoginScreen.routeName:
+        return LoginScreen.route(); 
 
       case CartScreen.routeName:
         return CartScreen.route();

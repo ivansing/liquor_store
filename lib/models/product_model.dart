@@ -34,6 +34,9 @@ class Product extends Equatable {
   });
 
   @override
+  int get typeId => 0;
+
+  @override
   List<Object?> get props =>
       [id, name, category, imageUrl, price, isPopular, isRecommended];
 
@@ -53,7 +56,7 @@ class Product extends Equatable {
             data.containsKey('isRecommended') ? data['isRecommended'] : false);
   }
 
-  static List<Product> products = [
+  /* static List<Product> products = [
     Product(
         id: '1',
         name: 'Nectar Verde',
@@ -108,5 +111,5 @@ class Product extends Equatable {
         price: 20000,
         isRecommended: true,
         isPopular: true),
-  ];
+  ]; */
 }

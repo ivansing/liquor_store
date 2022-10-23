@@ -32,15 +32,13 @@ class CustomNavBar extends StatelessWidget {
 }
 
 class HomeNavBar extends StatelessWidget {
- 
   const HomeNavBar({
-    Key? key,  
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-        
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -82,16 +80,17 @@ class AddToCartNavBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        IconButton(
-            icon: const Icon(Icons.share, color: Colors.white),
-            onPressed: () {}),
-        BlocBuilder<WishlistBloc, WishlistState>(
+        /* IconButton(
+          icon: const Icon(Icons.share, color: Colors.white),
+          onPressed: () {},
+        ),  */
+        /*  BlocBuilder<WishlistBloc, WishlistState>(
           builder: (context, state) {
             if (state is WishlistLoading) {
               return const CircularProgressIndicator();
             }
             if (state is WishlistLoaded) {
-              return IconButton(
+              return  IconButton(
                 icon: const Icon(
                   Icons.favorite,
                   color: Colors.white,
@@ -106,11 +105,11 @@ class AddToCartNavBar extends StatelessWidget {
                       .read<WishlistBloc>()
                       .add(AddtWishlistProduct(product));
                 },
-              );
+              ); 
             }
             return const Text('Algo salio pueder ser?');
           },
-        ),
+        ),  */
         BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             return ElevatedButton(

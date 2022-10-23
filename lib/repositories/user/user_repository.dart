@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/models/models.dart';
+
+
 import 'base_user_repository.dart';
 
 class UserRepository extends BaseUserRepository {
@@ -8,8 +10,6 @@ class UserRepository extends BaseUserRepository {
   UserRepository({
     FirebaseFirestore? firebaseFirestore,
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
-
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   @override
   Future<void> createUser(User user) async {
@@ -21,7 +21,7 @@ class UserRepository extends BaseUserRepository {
 
   @override
   Stream<User> getUser(String userId) {
-    print('Getting user data from Cloud Firestore');
+    print('Obteniendo de la base datos cloud firestore');
     return _firebaseFirestore
         .collection('users')
         .doc(userId)

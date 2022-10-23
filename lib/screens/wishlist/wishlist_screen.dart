@@ -6,12 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WishlistScreen extends StatelessWidget {
   static const String routeName = '/wishlist';
 
-  const WishlistScreen({Key? key}) : super(key: key);
-
   static Route route() {
     return MaterialPageRoute(
         settings: const RouteSettings(name: routeName),
-        builder: (context) => const WishlistScreen());
+        builder: (context) => WishlistScreen());
   }
 
   @override
@@ -20,7 +18,9 @@ class WishlistScreen extends StatelessWidget {
       appBar: const CustomAppBar(title: 'Lista Deseos'),
       bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: BlocBuilder<WishlistBloc, WishlistState>(
+       
         builder: (context, state) {
+           print('building..');
           if (state is WishlistLoading) {
             return const Center(
               child: CircularProgressIndicator(

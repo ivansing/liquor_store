@@ -1,22 +1,65 @@
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/auth/base_auth_repository.dart';
+import 'package:ecommerce_app/repositories/repositories.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class AuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
+  final UserRepository _userRepository;
 
-  AuthRepository({auth.FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
+  AuthRepository({
+    auth.FirebaseAuth? firebaseAuth,
+    required UserRepository userRepository,
+  })  : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance,
+        _userRepository = userRepository;
 
   // User changes emit current user
 
-  Stream<User> get user {
+  @override
+  Future<auth.User?> signUp({
+    required User user,
+    required String password,
+  }) async {
+    try {
+      _firebaseAuth
+          .createUserWithEmailAndPassword(
+            email: user.email,
+            password: password,
+          )
+          .then(
+            (value) => _userRepository.createUser(
+              user.copyWith(id: value.user!.uid),
+            ),
+          );
+    } catch (_) {}
+  }
+
+  Future<void> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (_) {}
+  }
+
+  Stream<auth.User?> get user => _firebaseAuth.userChanges();
+
+  @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  /*  Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       return firebaseUser == null ? User.empty : firebaseUser.toUser;
     });
-  }
+  } */
 
-  // Return current user [User.empty]
+  /* // Return current user [User.empty]
   User get currentUser {
     return User.empty;
   }
@@ -144,7 +187,7 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   }
 
   /// The associated error message.
-  final String message;
+  final String message; */
 }
 
 class LogOutFailure implements Exception {}
