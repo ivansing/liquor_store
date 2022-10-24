@@ -23,40 +23,51 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(title: category.name),
       bottomNavigationBar: const CustomNavBar(screen: routeName),
-      body: BlocBuilder<ProductBloc, ProductState>(
-        builder: (context, state) {
-          if (state is ProductLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is ProductLoaded) {
-            final List<Product> categoryProducts = state.products
-                .where((product) => product.category == category.name)
-                .toList();
-            return GridView.builder(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 16.0,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1.15,
-              ),
-              itemCount: categoryProducts.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Center(
-                  child: ProductCard.category(
-                    product: categoryProducts[index],
-                    widthFactor: 2.2,
-                  ),
-                );
+      body: SingleChildScrollView(
+        child: Column(
+          
+          children: [
+            const SizedBox(height: 10),
+            SearchBox(category: category),
+            BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                if (state is ProductLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is ProductLoaded) {
+                  final List<Product> categoryProducts = state.products
+                      .where((product) => product.category == category.name)
+                      .toList();
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 16.0,
+                    ),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1.15,
+                    ),
+                    itemCount: categoryProducts.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Center(
+                        child: ProductCard.category(
+                          product: categoryProducts[index],
+                          widthFactor: 2.2,
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const Text('Algo salio mal.');
+                }
               },
-            );
-          } else {
-            return const Text('Algo salio mal.');
-          }
-        },
+            ),
+          ],
+        ),
       ),
     );
   }

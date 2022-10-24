@@ -48,6 +48,7 @@ dependencies:
   firebase_auth: ^3.11.1
   formz: ^0.4.1
   flow_builder: ^0.0.9
+  google_sign_in: ^5.3.1
 
 dev_dependencies:
   flutter_test:

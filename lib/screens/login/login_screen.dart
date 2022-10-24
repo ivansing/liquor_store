@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/cubit/cubit.dart';
 import 'package:ecommerce_app/models/email_model.dart';
+import 'package:ecommerce_app/screens/home/home_screen.dart';
 import 'package:ecommerce_app/widgets/custom_appbar.dart';
 import 'package:ecommerce_app/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,9 @@ class LoginScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
-        builder: (_) => LoginScreen());
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => LoginScreen(),
+    );
   }
 
   @override
@@ -32,9 +34,9 @@ class LoginScreen extends StatelessWidget {
                 context.read<LoginCubit>().logInWithCredentials();
               },
               style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(),
+                shape: const RoundedRectangleBorder(),
                 primary: Colors.black,
-                fixedSize: Size(200, 40),
+                fixedSize: const Size(200, 40),
               ),
               child: Text(
                 'Ingreso',
@@ -44,6 +46,8 @@ class LoginScreen extends StatelessWidget {
                     .copyWith(color: Colors.white),
               ),
             ),
+            const SizedBox(height: 5),
+            const _GoogleLoginButton(),
           ],
         ),
       ),
@@ -80,6 +84,31 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
         );
       },
+    );
+  }
+}
+
+class _GoogleLoginButton extends StatelessWidget {
+  const _GoogleLoginButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        context.read<LoginCubit>().logInWithGoogle();
+      },
+      style: ElevatedButton.styleFrom(
+        shape: const RoundedRectangleBorder(),
+        primary: Colors.white,
+        fixedSize: const Size(200, 40),
+      ),
+      child: Text(
+        'Ingresar con Google',
+        style: Theme.of(context)
+            .textTheme
+            .headline4!
+            .copyWith(color: Colors.black),
+      ),
     );
   }
 }

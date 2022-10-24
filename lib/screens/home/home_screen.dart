@@ -62,53 +62,12 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                child: BlocBuilder<CategoryBloc, CategoryState>(
-                  builder: (context, state) {
-                    if (state is CategoryLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-
-                    if (state is CategoryLoaded) {
-                      return CarouselSlider(
-                        options: CarouselOptions(
-                          aspectRatio: 1.8,
-                          viewportFraction: 0.7,
-                          enlargeCenterPage: true,
-                          enlargeStrategy: CenterPageEnlargeStrategy.height,
-                        ),
-                        items: state.categories
-                            .map((category) => CarouselCard(category: category))
-                            .toList(),
-                      );
-                    } else {
-                      return const Text('Algo salio mal.');
-                    }
-                  },
-                ),
-              ),
+              
+                Carousel(),
+              
+            const  SearchBox(),
               const SectionTitle(title: 'Recomendados'),
-              BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  if (state is ProductLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-
-                  if (state is ProductLoaded) {
-                    return ProductCarousel(
-                      products: state.products
-                          .where((product) => product.isRecommended)
-                          .toList(),
-                    );
-                  } else {
-                    return const Text('Algo salio mal.');
-                  }
-                },
-              ),
+              const _ProductCarousel(),
               const SectionTitle(title: 'Mas Populares'),
               BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
@@ -131,6 +90,70 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ProductCarousel extends StatelessWidget {
+  const _ProductCarousel({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (context, state) {
+        if (state is ProductLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state is ProductLoaded) {
+          return ProductCarousel(
+            products: state.products
+                .where((product) => product.isRecommended)
+                .toList(),
+          );
+        } else {
+          return const Text('Algo salio mal.');
+        }
+      },
+    );
+  }
+}
+
+class Carousel extends StatelessWidget {
+  const Carousel({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CategoryBloc, CategoryState>(
+      builder: (context, state) {
+        if (state is CategoryLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state is CategoryLoaded) {
+          return CarouselSlider(
+            options: CarouselOptions(
+              aspectRatio: 1.8,
+              viewportFraction: 0.7,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+            ),
+            items: state.categories
+                .map((category) => CarouselCard(category: category))
+                .toList(),
+          );
+        } else {
+          return const Text('Algo salio mal.');
+        }
+      },
     );
   }
 }

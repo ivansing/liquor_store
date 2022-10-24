@@ -13,3 +13,4 @@ export 'expansion_details_text.dart';
 export 'custom_text_form_field.dart';
 export 'custom_appbar_profile.dart';
 export 'custom_appbar_homescreen.dart';
+export 'search_box.dart';

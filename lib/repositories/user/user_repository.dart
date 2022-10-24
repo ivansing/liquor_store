@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/models/models.dart';
 
-
 import 'base_user_repository.dart';
 
 class UserRepository extends BaseUserRepository {
@@ -13,10 +12,19 @@ class UserRepository extends BaseUserRepository {
 
   @override
   Future<void> createUser(User user) async {
-    await _firebaseFirestore
+    bool userExist =
+        (await _firebaseFirestore.collection('users').doc(user.id).get())
+            .exists;
+    if (userExist) {
+      return;
+    } else {
+      await _firebaseFirestore
         .collection('users')
         .doc(user.id)
         .set(user.toDocument());
+    }
+
+    
   }
 
   @override

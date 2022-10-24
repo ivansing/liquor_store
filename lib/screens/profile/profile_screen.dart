@@ -47,7 +47,18 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   context.read<AuthRepository>().signOut();
                 },
-                child: const Text('Salir'),
+                style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(),
+                  primary: Colors.black,
+                  fixedSize: const Size(200, 40),
+                ),
+                child: Text(
+                  'Salir',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline4!
+                      .copyWith(color: Colors.white),
+                ),
               ),
             );
           }
@@ -82,7 +93,6 @@ class ProfileScreen extends StatelessWidget {
                         .copyWith(color: Colors.white),
                   ),
                 ),
-                
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/register');
@@ -107,5 +117,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-

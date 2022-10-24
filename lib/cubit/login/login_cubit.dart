@@ -40,6 +40,15 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(status: LoginStatus.sucess));
     } catch (_) {}
   }
+
+  Future<void> logInWithGoogle() async {
+    if (state.status == LoginStatus.submitting) return;
+    emit(state.copyWith(status: LoginStatus.submitting));
+    try {
+      await _authRepository.logInWithGoogle();
+      emit(state.copyWith(status: LoginStatus.sucess));
+    } catch (_) {}
+  }
 }
   /* //Check in the login form if user email changed
   void emailChanged(String value) {

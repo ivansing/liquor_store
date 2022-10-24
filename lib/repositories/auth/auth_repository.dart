@@ -1,17 +1,24 @@
+
+
 import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/repositories/auth/base_auth_repository.dart';
 import 'package:ecommerce_app/repositories/repositories.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
+  GoogleSignIn? _googleSignIn;
   final UserRepository _userRepository;
 
   AuthRepository({
     auth.FirebaseAuth? firebaseAuth,
+    GoogleSignIn? googleSignIn,
     required UserRepository userRepository,
   })  : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance,
-        _userRepository = userRepository;
+        _userRepository = userRepository,
+        _googleSignIn =
+            googleSignIn ?? GoogleSignIn.standard(scopes: ['email']);
 
   // User changes emit current user
 
@@ -51,6 +58,30 @@ class AuthRepository {
   @override
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
+  }
+
+  Future<void> logInWithGoogle() async {
+    try {
+      late final auth.AuthCredential credential;
+
+      final googleUser = await _googleSignIn?.signIn();
+      final googleAuth = await googleUser!.authentication;
+
+      credential = auth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      _firebaseAuth.signInWithCredential(credential).then((value) {
+        _userRepository.createUser(
+          User(
+            id: value.user!.uid,
+            fullName: value.user!.displayName ?? '',
+            email: value.user!.email ?? '',
+          ),
+        );
+      });
+    } catch (_) {}
   }
 
   /*  Stream<User> get user {

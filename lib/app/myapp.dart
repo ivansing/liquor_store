@@ -71,6 +71,11 @@ class MyApp extends StatelessWidget {
             )..add(LoadProducts()),
           ),
           BlocProvider(
+            create: (context) => SearchBloc(
+              productBloc: context.read<ProductBloc>(),
+            )..add(LoadSearch()),
+          ),
+          BlocProvider(
             create: (context) => LoginCubit(
               authRepository: context.read<AuthRepository>(),
             ),
