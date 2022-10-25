@@ -42,23 +42,84 @@ class ProfileScreen extends StatelessWidget {
             );
           }
           if (state is ProfileLoaded) {
-            return Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  context.read<AuthRepository>().signOut();
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(),
-                  primary: Colors.black,
-                  fixedSize: const Size(200, 40),
-                ),
-                child: Text(
-                  'Salir',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: Colors.white),
-                ),
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'INFORMACIÓN CLIENTE',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: 'Email',
+                    initialValue: state.user.email,
+                    onChanged: (value) {
+                      context.read<ProfileBloc>().add(
+                            UpdateProfile(
+                              user: state.user.copyWith(email: value),
+                            ),
+                          );
+                    }, 
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: 'Nombre',
+                    initialValue: state.user.fullName,
+                    onChanged: (value) {
+                      context.read<ProfileBloc>().add(
+                            UpdateProfile(
+                              user: state.user.copyWith(fullName: value),
+                            ),
+                          );
+                    }, 
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: 'Dirección',
+                    initialValue: state.user.address,
+                    onChanged: (value) {
+                      context.read<ProfileBloc>().add(
+                            UpdateProfile(
+                              user: state.user.copyWith(address: value),
+                            ),
+                          );
+                    }, 
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: 'Ciudad',
+                    initialValue: state.user.city,
+                    onChanged: (value) {
+                      context.read<ProfileBloc>().add(
+                            UpdateProfile(
+                              user: state.user.copyWith(city: value),
+                            ),
+                          );
+                    }, 
+                  ),
+                  Expanded(child: Container()),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<AuthRepository>().signOut();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(),
+                        primary: Colors.black,
+                        fixedSize: const Size(200, 40),
+                      ),
+                      child: Text(
+                        'Salir',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline4!
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           }

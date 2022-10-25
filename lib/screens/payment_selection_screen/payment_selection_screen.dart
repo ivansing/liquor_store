@@ -28,7 +28,7 @@ class PaymentSelection extends StatelessWidget {
           }
           if (state is PaymentLoaded) {
             return ListView(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -43,13 +43,13 @@ class PaymentSelection extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {
                                 context.read<PaymentBloc>().add(
-                                      SelectPaymentMethod(
+                                    const   SelectPaymentMethod(
                                           paymentMethod:
                                               PaymentMethod.credit_card),
                                     );
                                 Navigator.pushNamed(context, '/order-confirmation');
                               },
-                              child: Text('Pagar'),
+                              child: const Text('Pagar'),
                             ),
                           ],
                         ),
@@ -120,7 +120,7 @@ class PaymentSelection extends StatelessWidget {
               ],
             );
           } else {
-            return Text('Algo salio mal');
+            return const Text('Algo salio mal');
           }
         },
       ),
@@ -128,14 +128,4 @@ class PaymentSelection extends StatelessWidget {
   }
 }
 
-/* ElevatedButton submitBotton(BuildContext context) {
-  return ElevatedButton(
-      style: ElevatedButton.styleFrom(primary: Colors.blue),
-      onPressed: () {
-        Navigator.pushNamed(context, '/order-confirmation');
-      },
-      child: Text(
-        'Pagar',
-        style: Theme.of(context).textTheme.headline3!,
-      ));
-} */
+

@@ -12,7 +12,7 @@ class OrderSummary extends StatelessWidget {
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         if (state is CartLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -102,7 +102,7 @@ class OrderSummary extends StatelessWidget {
             ],
           );
         } else {
-          return Text('Algo salio mal.');
+          return const Text('Algo salio mal.');
         }
       },
     );

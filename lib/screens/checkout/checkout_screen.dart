@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/blocs/checkout/checkout_bloc.dart';
+import 'package:ecommerce_app/models/models.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,9 @@ class CheckoutScreen extends StatelessWidget {
                 );
               }
               if (state is CheckoutLoaded) {
+
+                // if user object is nullable have to pass empty user object
+                var user = state.user ?? User.empty;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,21 +43,29 @@ class CheckoutScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 30),
                     CustomTextFormField(
-                        onChanged: (value) {
-                          context.read<CheckoutBloc>().add(
-                                UpdateCheckout(email: value),
-                              );
-                        },
-                        context: context,
-                        title: 'Email'),
+                      title: 'Email',
+                      initialValue: user.email,
+                      onChanged: (value) {
+                        context.read<CheckoutBloc>().add(
+                              UpdateCheckout(
+                                user:
+                                    state.checkout.user!.copyWith(email: value),
+                              ),
+                            );
+                      },
+                    ),
                     CustomTextFormField(
+                      title: 'Nombre Completo',
+                      initialValue: user.fullName,
                         onChanged: (value) {
                           context.read<CheckoutBloc>().add(
-                                UpdateCheckout(fullName: value),
+                                UpdateCheckout(
+                                  user: state.checkout.user!
+                                      .copyWith(fullName: value),
+                                ),
                               );
                         },
-                        context: context,
-                        title: 'Nombre Completo'),
+                        ),
                     const SizedBox(height: 20),
                     Text(
                       'INFORMACIÓN ENVIO',
@@ -61,21 +73,29 @@ class CheckoutScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                        onChanged: (value) {
-                          context.read<CheckoutBloc>().add(
-                                UpdateCheckout(address: value),
-                              );
-                        },
-                        context: context,
-                        title: 'Dirección'),
+                      title: 'Dirección',
+                      initialValue: user.address,
+                      onChanged: (value) {
+                        context.read<CheckoutBloc>().add(
+                              UpdateCheckout(
+                                user: state.checkout.user!
+                                    .copyWith(address: value),
+                              ),
+                            );
+                      },
+                    ),
                     CustomTextFormField(
-                        onChanged: (value) {
-                          context.read<CheckoutBloc>().add(
-                                UpdateCheckout(city: value),
-                              );
-                        },
-                        context: context,
-                        title: 'Ciudad'),
+                      title: 'Ciudad',
+                      initialValue: user.city,
+                      onChanged: (value) {
+                        context.read<CheckoutBloc>().add(
+                              UpdateCheckout(
+                                user:
+                                    state.checkout.user!.copyWith(city: value),
+                              ),
+                            );
+                      },
+                    ),
                     const SizedBox(height: 20),
                     const SizedBox(height: 30),
                     Text(

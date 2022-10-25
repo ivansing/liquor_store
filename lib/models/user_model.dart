@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart' ;
 import 'package:equatable/equatable.dart';
 
 /// [User.empty] represents an unauthenticated user.
 
 class User extends Equatable {
-
   // Current's user data fields
   final String? id;
   final String fullName;
@@ -19,8 +18,6 @@ class User extends Equatable {
     this.address = '',
     this.city = '',
   });
-
-  
 
   User copyWith({
     String? id,
@@ -46,7 +43,7 @@ class User extends Equatable {
   // Convenience getter to determine whether the current user is not empty.
   // bool get isNotEmpty => this != User.empty;
 
-  /* factory User.fromSnapshot(DocumentSnapshot snapshot) {
+   /* factory User.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
     //  If data is null, check the data type
@@ -59,7 +56,7 @@ class User extends Equatable {
     );
   } */
 
-  factory User.fromSnapshot(DocumentSnapshot doc) {
+  /* factory User.fromSnapshot(DocumentSnapshot doc) {
     return User(
       id: doc.data().toString().contains('id') ? doc.get('id') : '',
       fullName: doc.data().toString().contains('name') ? doc.get('name') : '',
@@ -67,7 +64,20 @@ class User extends Equatable {
       address: doc.data().toString().contains('address') ? doc.get('address') : '',
       city: doc.data().toString().contains('city') ? doc.get('city') : '',
     );
-  }
+  } */
+
+   factory User.fromJson(
+    Map<String, dynamic> json, [
+    String? id, 
+  ]) {
+    return User(
+      id: id ?? json['id'],
+      fullName:  json['fullName'],
+      email:  json['email'],
+      address:  json['address'],
+      city:  json['city'],
+    );
+  } 
 
   Map<String, dynamic> toDocument() {
     return {
@@ -77,6 +87,8 @@ class User extends Equatable {
       'city': city,
     };
   }
+
+  static const empty = User(id: '');
 
   @override
   List<Object?> get props => [email, id, fullName, address, city];
