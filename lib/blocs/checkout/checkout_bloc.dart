@@ -90,15 +90,11 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       final state = this.state as CheckoutLoaded;
       emit(
         CheckoutLoaded(
-          /* email: event.email ?? state.email,
-          fullName: event.fullName ?? state.fullName, */
           user: event.user ?? state.user,
           products: event.cart?.products ?? state.products,
           deliveryFee: event.cart?.deliveryFeeString ?? state.deliveryFee,
           subtotal: event.cart?.subtotalString ?? state.subtotal,
           total: event.cart?.totalString ?? state.total,
-          /*  address: event.address ?? state.address,
-          city: event.city ?? state.city, */
           paymentMethod: event.paymentMethod ?? state.paymentMethod,
         ),
       );

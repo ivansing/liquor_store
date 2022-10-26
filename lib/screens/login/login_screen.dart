@@ -96,6 +96,7 @@ class _GoogleLoginButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         context.read<LoginCubit>().logInWithGoogle();
+        Navigator.pushNamed(context, '/profile');
       },
       style: ElevatedButton.styleFrom(
         shape: const RoundedRectangleBorder(),

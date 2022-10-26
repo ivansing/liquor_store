@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/blocs/blocs.dart';
 import 'package:ecommerce_app/models/models.dart';
+import 'package:ecommerce_app/models/payment_method_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -80,36 +81,6 @@ class AddToCartNavBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        /* IconButton(
-          icon: const Icon(Icons.share, color: Colors.white),
-          onPressed: () {},
-        ),  */
-        /*  BlocBuilder<WishlistBloc, WishlistState>(
-          builder: (context, state) {
-            if (state is WishlistLoading) {
-              return const CircularProgressIndicator();
-            }
-            if (state is WishlistLoaded) {
-              return  IconButton(
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Se agrego a tu lista de deseos'),
-                    ),
-                  );
-                  context
-                      .read<WishlistBloc>()
-                      .add(AddtWishlistProduct(product));
-                },
-              ); 
-            }
-            return const Text('Algo salio pueder ser?');
-          },
-        ),  */
         BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             return ElevatedButton(
@@ -174,7 +145,7 @@ class OrderNowNavBar extends StatelessWidget {
           builder: (context, state) {
             if (state is CheckoutLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.black),
               );
             }
             if (state is CheckoutLoaded) {
@@ -184,10 +155,6 @@ class OrderNowNavBar extends StatelessWidget {
                   shape: const RoundedRectangleBorder(),
                 ),
                 onPressed: () {
-                  context
-                      .read<CheckoutBloc>()
-                      .add(ConfirmCheckout(checkout: state.checkout));
-
                   Navigator.pushNamed(context, '/payment-selection');
                 },
                 child: Text(

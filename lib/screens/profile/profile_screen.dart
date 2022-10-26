@@ -30,6 +30,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const CustomAppBarProfile(title: 'Perfil'),
       bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: BlocBuilder<ProfileBloc, ProfileState>(
@@ -61,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                               user: state.user.copyWith(email: value),
                             ),
                           );
-                    }, 
+                    },
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
@@ -73,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                               user: state.user.copyWith(fullName: value),
                             ),
                           );
-                    }, 
+                    },
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
@@ -85,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                               user: state.user.copyWith(address: value),
                             ),
                           );
-                    }, 
+                    },
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
@@ -97,14 +98,16 @@ class ProfileScreen extends StatelessWidget {
                               user: state.user.copyWith(city: value),
                             ),
                           );
-                    }, 
+                    },
                   ),
                   Expanded(child: Container()),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
                         context.read<AuthRepository>().signOut();
+                        Navigator.pushNamed(context, '/profile');
                       },
+                      
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(),
                         primary: Colors.black,

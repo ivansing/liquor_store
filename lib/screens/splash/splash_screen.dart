@@ -10,16 +10,15 @@ class SplashScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
         settings: const RouteSettings(name: routeName),
-        builder: (_) =>
-            SplashScreen() /* (context) {
+        builder: (_) => SplashScreen() /* (context) {
         // testing dev
           print(
             'From SplashScreen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
         return BlocProvider.of<AuthBloc>(context).state.status ==
                 AuthStatus.unauthenticated
-            ? const LoginScreen()
+            ?  LoginScreen()
             : HomeScreen(); 
-      }   */
+      }    */
         );
   }
 
@@ -31,7 +30,7 @@ class SplashScreen extends StatelessWidget {
       listenWhen: (previous, current) => previous.authUser != current.authUser,
       listener: (context, state) {
         print("Splash screen Auth Listener");
-        /* if (state.status == AuthStatus.unauthenticated) {
+         /* if (state.status == AuthStatus.unauthenticated) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                 LoginScreen.routeName,
                 ModalRoute.withName('/login'),
@@ -41,7 +40,7 @@ class SplashScreen extends StatelessWidget {
                 const Duration(seconds: 1),
                 () => Navigator.of(context).pushNamed(HomeScreen.routeName),
               );
-            } */
+            }  */
       },
       child: Scaffold(
         body: Column(
