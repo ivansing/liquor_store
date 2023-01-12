@@ -29,14 +29,14 @@ class Cart extends Equatable {
   double get subtotal =>
       products.fold(0, (total, current) => total + current.price);
 
-  double deliveryFee(subtotal) {
+   double deliveryFee(subtotal) {
     if (subtotal >= 200000) {
       return 0.0;
     } else {
     
       return 8000;
     }
-  }
+  } 
 
   double total(subtotal, deliveryFee) {
     return subtotal + deliveryFee(subtotal);

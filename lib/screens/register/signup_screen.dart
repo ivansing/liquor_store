@@ -26,7 +26,6 @@ class SignUpScreen extends StatelessWidget {
         child: BlocBuilder<SignUpCubit, SignupState>(
           builder: (context, state) {
             return SingleChildScrollView(
-              
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -79,6 +78,24 @@ class SignUpScreen extends StatelessWidget {
                           .textTheme
                           .headline4!
                           .copyWith(color: Colors.white),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<LoginCubit>().logInWithGoogle();
+                      Navigator.pushNamed(context, '/profile');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(),
+                      primary: Colors.white,
+                      fixedSize: const Size(200, 40),
+                    ),
+                    child: Text(
+                      'Ingresar con Google',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(color: Colors.black),
                     ),
                   ),
                 ],

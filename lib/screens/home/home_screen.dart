@@ -19,53 +19,42 @@ class HomeScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
         settings: const RouteSettings(name: routeName),
-        builder: (_) =>
-            HomeScreen() /*  (context) {
-        // testing dev
-          print(
-            'From home_screen routee ${BlocProvider.of<AuthBloc>(context).state.status}');
-        return BlocProvider.of<AuthBloc>(context).state.status ==
-                AuthStatus.unauthenticated
-            ? const LoginScreen()
-            : HomeScreen(); 
-      }   */
-        );
+        builder: (_) => HomeScreen());
   }
 
   @override
   Widget build(BuildContext context) {
     Future<bool> showExitPopup() async {
       return await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Salir App'),
-          content: const Text('¿Quieres salir de la app?'),
-          actions: [
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('No'),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Si'),
-            ),
-          ],
-        ),
-      )??false; // if showDialogue had returned null, then return false
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text('Salir App'),
+                content: const Text('¿Quieres salir de al App?'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    // return false when click on "NO"
+                    child: const Text('No'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    // return true when click on "Yes"
+                    child: const Text('Si'),
+                  ),
+                ],
+              ));
     }
 
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: showExitPopup,
       child: Scaffold(
         appBar: const CustomAppBarHomeScreen(title: 'LICORERIA'),
         bottomNavigationBar: const CustomNavBar(screen: routeName),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              
-                Carousel(),
-              
-            const  SearchBox(),
+              const Carousel(),
+              const SearchBox(),
               const SectionTitle(title: 'Recomendados'),
               const _ProductCarousel(),
               const SectionTitle(title: 'Mas Populares'),

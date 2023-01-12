@@ -8,14 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyApp extends StatelessWidget {
-  /*  const MyApp({
-    super.key,
-    required AuthRepository authRepository,
-  }) : _authRepository = authRepository;
-
-  final AuthRepository _authRepository; */
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -87,17 +79,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ],
-        child: const MyAppView(),
+        child: MyAppView(),
       ),
     );
   }
 }
 
 class MyAppView extends StatelessWidget {
-  const MyAppView({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -109,27 +97,3 @@ class MyAppView extends StatelessWidget {
     );
   }
 }
-
-/* class MyAppView2 extends StatefulWidget {
-  const MyAppView2({Key? key}) : super(key: key);
-
-  @override
-  State<MyAppView2> createState() => _MyAppViewState();
-}
- */
-/* class _MyAppView2State extends State<MyAppView2> {
-  final _navigatorKey = GlobalKey<NavigatorState>();
-  NavigatorState? get _navigator => _navigatorKey.currentState;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Licoreria App',
-      theme: theme(),
-      navigatorKey: _navigatorKey,
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: SplashScreen.routeName,
-    );
-  }
-} */

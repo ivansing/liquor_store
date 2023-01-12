@@ -42,7 +42,7 @@ class CategoryScreen extends StatelessWidget {
                       .toList();
                   return GridView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8.0,
                       vertical: 16.0,

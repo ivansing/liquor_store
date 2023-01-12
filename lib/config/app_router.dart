@@ -9,23 +9,20 @@ class AppRouter {
     print('Esta es la ruta: ${settings.name}');
 
     switch (settings.name) {
-
       case '/':
-      return HomeScreen.route();
-     /*  case HomeScreen.routeName:
-        return HomeScreen.route(); */
+        return HomeScreen.route();
 
       case HomeScreen.routeName:
-      return HomeScreen.route();
+        return HomeScreen.route();
 
       case SplashScreen.routeName:
         return SplashScreen.route();
 
-       case SignUpScreen.routeName:
-        return SignUpScreen.route(); 
+      case SignUpScreen.routeName:
+        return SignUpScreen.route();
 
-       case LoginScreen.routeName:
-        return LoginScreen.route(); 
+      case LoginScreen.routeName:
+        return LoginScreen.route();
 
       case CartScreen.routeName:
         return CartScreen.route();

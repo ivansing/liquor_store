@@ -15,10 +15,5 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProductAdapter());
 
-  /* final authRepository = AuthRepository();
-  await authRepository.user.first; */
-
-  runApp(MyApp(
-      /* authRepository: authRepository, */
-      ));
+  runApp(MyApp());
 }
