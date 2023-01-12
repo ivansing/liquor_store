@@ -1,16 +1,26 @@
-# licores_app
+# Liquor Store
 
-A new Flutter project.
+> This is liquor store app to sell online made for colombian market.
+> Live demo  [_here_](https://ivansing.github.io/liquor_store/)
 
-## Getting Started
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## General Information
+- App to sell liquor products, with a cart feature and to have distint payments methods (just samples)
+- is has some other features like: register with Google as well email and password.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies Used
+- Flutter front development 
+- Bloc, Cubits.
+- Firebase Firestore.
+- Backend admin panel React and Firebase Firestore 
+
+## Features
+The app have some basic features like:
+- Register and Loging with email and password and Google
+- List Categories views, and  list products views, checkout page and resume purchase
+- User info
