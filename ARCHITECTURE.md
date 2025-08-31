@@ -1,10 +1,10 @@
-# 🏗️ Architecture Documentation
+# 🏗 Architecture Documentation
 
 ## Overview
 
 This Flutter e-commerce application follows **Clean Architecture** principles with the **BLoC pattern** for state management. The architecture ensures separation of concerns, testability, and maintainability while providing a scalable foundation for enterprise-level mobile applications.
 
-## 🎯 Architecture Principles
+##  Architecture Principles
 
 ### **Clean Architecture Layers**
 
@@ -49,7 +49,7 @@ This Flutter e-commerce application follows **Clean Architecture** principles wi
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 🧠 State Management Architecture
+##  State Management Architecture
 
 ### **BLoC Pattern Implementation**
 
@@ -139,7 +139,7 @@ repositories/
 └── [other repositories...]
 ```
 
-## 🔄 Dependency Injection
+##  Dependency Injection
 
 ### **Provider Setup**
 
@@ -178,7 +178,7 @@ App Root
     └── CheckoutBloc (depends on AuthBloc, CartBloc)
 ```
 
-## 🎨 Presentation Layer Architecture
+##  Presentation Layer Architecture
 
 ### **Screen Structure**
 
@@ -221,7 +221,7 @@ widgets/
 └── [other reusable widgets...]
 ```
 
-## 🔥 Firebase Integration Architecture
+##  Firebase Integration Architecture
 
 ### **Firebase Services Structure**
 
@@ -249,7 +249,7 @@ BLoC → Repository → Firestore Service → Cloud Firestore
 UI ← State Update ← Stream/Future ← Real-time Updates
 ```
 
-## 📱 Local Storage Architecture
+##  Local Storage Architecture
 
 ### **Hive Implementation**
 
@@ -278,7 +278,7 @@ Local Storage (Hive)
 └── Cached Products               # Offline browsing
 ```
 
-## 🧪 Testing Architecture
+##  Testing Architecture
 
 ### **Testing Strategy**
 
@@ -297,7 +297,7 @@ test/
     └── app_test.dart              # End-to-end tests
 ```
 
-## 🔧 Configuration Architecture
+##  Configuration Architecture
 
 ### **App Configuration**
 
@@ -324,7 +324,7 @@ Environment Variables
     └── Analytics Enabled
 ```
 
-## 🚀 Performance Architecture
+##  Performance Architecture
 
 ### **Optimization Strategies**
 
@@ -352,7 +352,7 @@ Cache Layers
 └── Network Cache (Firebase)
 ```
 
-## 🔐 Security Architecture
+##  Security Architecture
 
 ### **Security Layers**
 
@@ -371,7 +371,7 @@ Cache Layers
    - Certificate pinning (future)
    - API key protection
 
-## 📈 Scalability Considerations
+##  Scalability Considerations
 
 ### **Horizontal Scaling**
 
@@ -393,7 +393,7 @@ New Feature Addition
 - **Multi-platform**: Same business logic across platforms
 - **Feature Toggles**: Easy feature enabling/disabling
 
-## 🛠️ Development Workflow
+##  Development Workflow
 
 ### **Architecture Guidelines**
 
