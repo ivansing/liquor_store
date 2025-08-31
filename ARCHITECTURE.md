@@ -1,4 +1,4 @@
-# 🏗 Architecture Documentation
+#  Architecture Documentation
 
 ## Overview
 
